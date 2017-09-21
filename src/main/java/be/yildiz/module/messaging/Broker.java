@@ -29,7 +29,6 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.broker.BrokerService;
 
 import javax.jms.Connection;
-import javax.jms.JMSException;
 import java.io.File;
 
 /**
@@ -61,7 +60,7 @@ public class Broker {
         }
     }
 
-    public BrokerMessageDestination createQueue(String name) throws JMSException {
+    public BrokerMessageDestination createQueue(String name) {
         return new BrokerMessageDestination(this.connection, name);
     }
 
