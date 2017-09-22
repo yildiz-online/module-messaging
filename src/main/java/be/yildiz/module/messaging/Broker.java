@@ -43,7 +43,20 @@ public class Broker {
         super();
     }
 
-    public static Broker initialize(String name, File dataDirectory, String host, int port) {
+    public static Broker initialize(String host, int port) {
+        try {
+            Broker broker = new Broker();
+            String address = "tcp://" + host + ":" + port;
+            ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(address);
+            broker.connection = connectionFactory.createConnection();
+            broker.connection.start();
+            return broker;
+        } catch (Exception e) {
+            throw new InitializationException(e);
+        }
+    }
+
+    public static Broker initializeInternal(String name, File dataDirectory, String host, int port) {
         try {
             Broker broker = new Broker();
             broker.brokerService.setBrokerName(name);
@@ -60,7 +73,7 @@ public class Broker {
         }
     }
 
-    public BrokerMessageDestination createQueue(String name) {
+    public BrokerMessageDestination registerQueue(String name) {
         return new BrokerMessageDestination(this.connection, name);
     }
 

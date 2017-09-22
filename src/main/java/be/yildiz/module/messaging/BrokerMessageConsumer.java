@@ -24,39 +24,32 @@
 
 package be.yildiz.module.messaging;
 
-import be.yildiz.common.exeption.InitializationException;
+import be.yildiz.common.exeption.TechnicalException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import javax.jms.Connection;
-import javax.jms.JMSException;
-import javax.jms.Queue;
-import javax.jms.Session;
+import javax.jms.*;
 
 /**
  * @author Grégory Van den Borre
  */
-public class BrokerMessageDestination {
+public class BrokerMessageConsumer {
 
-    private final Session session;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private final Queue destination;
-
-    BrokerMessageDestination(Connection connection, String name) {
-        super();
+    BrokerMessageConsumer(Session session, Destination destination, BrokerMessageListener listener) {
         try {
-            this.session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-            this.destination = this.session.createQueue(name);
+            MessageConsumer consumer= session.createConsumer(destination);
+            consumer.setMessageListener((m) -> {
+                        try {
+                            listener.messageReceived(((TextMessage) m).getText());
+                        } catch (JMSException e) {
+                            logger.error("Error retrieving JMS message", e);
+                        }
+                    }
+            );
         } catch (JMSException e) {
-            throw new InitializationException(e);
+            throw new TechnicalException(e);
         }
     }
-
-    public BrokerMessageProducer createProducer() {
-        return new BrokerMessageProducer(this.session, this.destination);
-    }
-
-    public BrokerMessageConsumer createConsumer(BrokerMessageListener listener) {
-        return new BrokerMessageConsumer(this.session, this.destination, listener);
-    }
-
-
 }
