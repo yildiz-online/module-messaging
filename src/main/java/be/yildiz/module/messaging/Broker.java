@@ -74,7 +74,11 @@ public class Broker {
     }
 
     public BrokerMessageDestination registerQueue(String name) {
-        return new BrokerMessageDestination(this.connection, name);
+        return new BrokerMessageDestination(this.connection, name, false);
+    }
+
+    public BrokerMessageDestination registerTopic(String name) {
+        return new BrokerMessageDestination(this.connection, name, true);
     }
 
     public void close() throws Exception {

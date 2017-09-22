@@ -29,20 +29,19 @@ import be.yildiz.common.exeption.TechnicalException;
 
 import javax.jms.Destination;
 import javax.jms.JMSException;
-import javax.jms.MessageProducer;
 import javax.jms.Session;
 
 /**
  * @author Grégory Van den Borre
  */
-public class BrokerMessageProducer {
+public class MessageProducer {
 
     private final Session session;
 
 
-    private final MessageProducer producer;
+    private final javax.jms.MessageProducer producer;
 
-    BrokerMessageProducer(Session session, Destination destination) {
+    MessageProducer(Session session, Destination destination) {
         try {
             this.session = session;
             this.producer = this.session.createProducer(destination);

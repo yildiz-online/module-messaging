@@ -28,18 +28,21 @@ import be.yildiz.common.exeption.TechnicalException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.jms.*;
+import javax.jms.Destination;
+import javax.jms.JMSException;
+import javax.jms.Session;
+import javax.jms.TextMessage;
 
 /**
  * @author Grégory Van den Borre
  */
-public class BrokerMessageConsumer {
+public class MessageConsumer {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    BrokerMessageConsumer(Session session, Destination destination, BrokerMessageListener listener) {
+    MessageConsumer(Session session, Destination destination, BrokerMessageListener listener) {
         try {
-            MessageConsumer consumer= session.createConsumer(destination);
+            javax.jms.MessageConsumer consumer= session.createConsumer(destination);
             consumer.setMessageListener((m) -> {
                         try {
                             listener.messageReceived(((TextMessage) m).getText());

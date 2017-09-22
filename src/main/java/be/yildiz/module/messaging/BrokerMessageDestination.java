@@ -27,8 +27,8 @@ package be.yildiz.module.messaging;
 import be.yildiz.common.exeption.InitializationException;
 
 import javax.jms.Connection;
+import javax.jms.Destination;
 import javax.jms.JMSException;
-import javax.jms.Queue;
 import javax.jms.Session;
 
 /**
@@ -38,24 +38,28 @@ public class BrokerMessageDestination {
 
     private final Session session;
 
-    private final Queue destination;
+    private final Destination destination;
 
-    BrokerMessageDestination(Connection connection, String name) {
+    BrokerMessageDestination(Connection connection, String name, boolean topic) {
         super();
         try {
             this.session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-            this.destination = this.session.createQueue(name);
+            if(topic) {
+                this.destination = this.session.createTopic(name);
+            } else {
+                this.destination = this.session.createQueue(name);
+            }
         } catch (JMSException e) {
             throw new InitializationException(e);
         }
     }
 
-    public BrokerMessageProducer createProducer() {
-        return new BrokerMessageProducer(this.session, this.destination);
+    public MessageProducer createProducer() {
+        return new MessageProducer(this.session, this.destination);
     }
 
-    public BrokerMessageConsumer createConsumer(BrokerMessageListener listener) {
-        return new BrokerMessageConsumer(this.session, this.destination, listener);
+    public MessageConsumer createConsumer(BrokerMessageListener listener) {
+        return new MessageConsumer(this.session, this.destination, listener);
     }
 
 
