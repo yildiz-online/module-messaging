@@ -43,6 +43,10 @@ public class Broker {
         super();
     }
 
+    public static Broker initialize(BrokerProperties properties) {
+        return Broker.initialize(properties.getHost(), properties.getPort());
+    }
+
     public static Broker initialize(String host, int port) {
         try {
             Broker broker = new Broker();
@@ -54,6 +58,10 @@ public class Broker {
         } catch (Exception e) {
             throw new InitializationException(e);
         }
+    }
+
+    public static Broker initializeInternal(String name, BrokerProperties properties) {
+        return Broker.initializeInternal(name, new File(properties.getData()), properties.getHost(), properties.getPort());
     }
 
     public static Broker initializeInternal(String name, File dataDirectory, String host, int port) {
