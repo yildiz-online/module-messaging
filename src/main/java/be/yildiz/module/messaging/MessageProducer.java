@@ -29,6 +29,7 @@ import be.yildiz.common.exeption.TechnicalException;
 
 import javax.jms.Destination;
 import javax.jms.JMSException;
+import javax.jms.Message;
 import javax.jms.Session;
 
 /**
@@ -37,7 +38,6 @@ import javax.jms.Session;
 public class MessageProducer {
 
     private final Session session;
-
 
     private final javax.jms.MessageProducer producer;
 
@@ -50,9 +50,17 @@ public class MessageProducer {
         }
     }
 
-    public void sendMessage(String message) {
+    public void sendMessage(String message, Header... headers) {
         try {
-            this.producer.send(this.session.createTextMessage(message));
+            Message toSend = this.session.createTextMessage(message);
+            if(headers != null) {
+                for (Header h : headers) {
+                    if (h.isCorrelationId()) {
+                        toSend.setJMSCorrelationID(h.getValue());
+                    }
+                }
+            }
+            this.producer.send(toSend);
         } catch (JMSException e) {
             throw new TechnicalException(e);
         }

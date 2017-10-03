@@ -45,7 +45,10 @@ public class MessageConsumer {
             javax.jms.MessageConsumer consumer= session.createConsumer(destination);
             consumer.setMessageListener((m) -> {
                         try {
-                            listener.messageReceived(((TextMessage) m).getText());
+                            Message message = new Message(
+                                    ((TextMessage) m).getText(),
+                                    m.getJMSCorrelationID());
+                            listener.messageReceived(message);
                         } catch (JMSException e) {
                             logger.error("Error retrieving JMS message", e);
                         }
