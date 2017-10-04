@@ -50,7 +50,7 @@ public class Broker {
     public static Broker initialize(String host, int port) {
         try {
             Broker broker = new Broker();
-            String address = "tcp://" + host + ":" + port;
+            String address = "failover:tcp://" + host + ":" + port;
             ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(address);
             broker.connection = connectionFactory.createConnection();
             broker.connection.start();
