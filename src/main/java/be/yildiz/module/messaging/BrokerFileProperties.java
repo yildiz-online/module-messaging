@@ -48,17 +48,17 @@ public class BrokerFileProperties implements BrokerProperties {
     }
 
     @Override
-    public final String getHost() {
+    public final String getBrokerHost() {
         return this.host;
     }
 
     @Override
-    public final int getPort() {
+    public final int getBrokerPort() {
         return this.port;
     }
 
     @Override
-    public final String getData() {
+    public final String getBrokerDataFolder() {
         return this.data;
     }
 }

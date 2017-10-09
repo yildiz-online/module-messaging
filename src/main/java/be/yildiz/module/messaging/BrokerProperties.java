@@ -29,9 +29,9 @@ package be.yildiz.module.messaging;
  */
 public interface BrokerProperties {
 
-    String getHost();
+    String getBrokerHost();
 
-    int getPort();
+    int getBrokerPort();
 
-    String getData();
+    String getBrokerDataFolder();
 }

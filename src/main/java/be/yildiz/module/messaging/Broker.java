@@ -44,7 +44,7 @@ public class Broker {
     }
 
     public static Broker initialize(BrokerProperties properties) {
-        return Broker.initialize(properties.getHost(), properties.getPort());
+        return Broker.initialize(properties.getBrokerHost(), properties.getBrokerPort());
     }
 
     public static Broker initialize(String host, int port) {
@@ -61,7 +61,7 @@ public class Broker {
     }
 
     public static Broker initializeInternal(String name, BrokerProperties properties) {
-        return Broker.initializeInternal(name, new File(properties.getData()), properties.getHost(), properties.getPort());
+        return Broker.initializeInternal(name, new File(properties.getBrokerDataFolder()), properties.getBrokerHost(), properties.getBrokerPort());
     }
 
     public static Broker initializeInternal(String name, File dataDirectory, String host, int port) {
