@@ -27,6 +27,8 @@ package be.yildiz.module.messaging;
 import be.yildiz.common.exeption.InitializationException;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.broker.BrokerService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.jms.Connection;
 import java.io.File;
@@ -35,6 +37,8 @@ import java.io.File;
  * @author Grégory Van den Borre
  */
 public class Broker {
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private final BrokerService brokerService = new BrokerService();
     private Connection connection;
@@ -51,6 +55,7 @@ public class Broker {
         try {
             Broker broker = new Broker();
             String address = "failover:tcp://" + host + ":" + port;
+            broker.logger.info("Connecting to broker: " + address);
             ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(address);
             broker.connection = connectionFactory.createConnection();
             broker.connection.start();
