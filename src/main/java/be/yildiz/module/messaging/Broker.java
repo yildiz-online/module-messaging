@@ -32,6 +32,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.jms.Connection;
 import java.io.File;
+import java.nio.file.Path;
 
 /**
  * @author Grégory Van den Borre
@@ -68,6 +69,10 @@ public class Broker {
 
     public static Broker initializeInternal(String name, BrokerProperties properties) {
         return Broker.initializeInternal(name, new File(properties.getBrokerDataFolder()), properties.getBrokerHost(), properties.getBrokerPort());
+    }
+
+    public static Broker initializeInternal(String name, Path dataDirectory, String host, int port) {
+        return Broker.initializeInternal(name, dataDirectory.toFile(), host, port);
     }
 
     public static Broker initializeInternal(String name, File dataDirectory, String host, int port) {
