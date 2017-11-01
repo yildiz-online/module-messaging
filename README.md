@@ -26,7 +26,7 @@ Wiki:
 https://yildiz.atlassian.net/wiki
 
 Quality report:
-https://sonarqube.com/overview?id=be.yildiz-games:module-messaging
+https://sonarcloud.io/dashboard?id=be.yildiz-games%3Amodule-messaging
 
 ## License
 
@@ -51,9 +51,11 @@ In your maven project, add the dependency
 <dependency>
     <groupId>be.yildiz-games</groupId>
     <artifactId>module-messaging</artifactId>
-    <version>1.0.0</version>
+    <version>LATEST</version>
 </dependency>
 ```
+
+Replace LATEST with the version number to use.
 
 ## Contact
 Owner of this repository: Grégory Van den Borre
