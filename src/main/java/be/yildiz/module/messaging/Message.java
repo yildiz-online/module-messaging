@@ -33,16 +33,23 @@ public class Message {
 
     private final String correlationId;
 
-    Message(String text, String correlationId) {
+    Message(final String text, final String correlationId) {
+        assert text != null;
+        assert correlationId != null;
         this.text = text;
         this.correlationId = correlationId;
     }
 
-    public String getText() {
-        return text;
+    public final String getText() {
+        return this.text;
     }
 
-    public String getCorrelationId() {
-        return correlationId;
+    public final String getCorrelationId() {
+        return this.correlationId;
+    }
+
+    @Override
+    public final String toString() {
+        return this.getText();
     }
 }
