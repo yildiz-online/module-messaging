@@ -24,6 +24,7 @@
 
 package be.yildiz.module.messaging;
 
+import be.yildiz.common.collections.Lists;
 import be.yildiz.common.exeption.TechnicalException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +33,8 @@ import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.Session;
 import javax.jms.TextMessage;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author Grégory Van den Borre
@@ -40,14 +43,17 @@ public class MessageConsumer {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    private final List<Message> messageReceived = Lists.newList();
+
     MessageConsumer(Session session, Destination destination, BrokerMessageListener listener) {
         try {
-            javax.jms.MessageConsumer consumer= session.createConsumer(destination);
+            javax.jms.MessageConsumer consumer = session.createConsumer(destination);
             consumer.setMessageListener((m) -> {
                         try {
                             Message message = new Message(
                                     ((TextMessage) m).getText(),
                                     m.getJMSCorrelationID());
+                            this.messageReceived.add(message);
                             listener.messageReceived(message);
                         } catch (JMSException e) {
                             logger.error("Error retrieving JMS message", e);
@@ -57,5 +63,13 @@ public class MessageConsumer {
         } catch (JMSException e) {
             throw new TechnicalException(e);
         }
+    }
+
+    public final List<Message> getMessageReceived() {
+        return Collections.unmodifiableList(this.messageReceived);
+    }
+
+    public final boolean hasMessage() {
+        return !this.messageReceived.isEmpty();
     }
 }
