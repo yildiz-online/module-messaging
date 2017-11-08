@@ -24,43 +24,11 @@
 
 package be.yildiz.module.messaging;
 
-import be.yildiz.common.exeption.InitializationException;
-
-import javax.jms.Connection;
-import javax.jms.Destination;
-import javax.jms.JMSException;
-import javax.jms.Session;
-
 /**
  * @author Grégory Van den Borre
  */
-public class BrokerMessageDestination {
+@FunctionalInterface
+public interface AsyncMessageProducer {
 
-    private final Session session;
-
-    private final Destination destination;
-
-    BrokerMessageDestination(Connection connection, String name, boolean topic) {
-        super();
-        try {
-            this.session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-            if(topic) {
-                this.destination = this.session.createTopic(name);
-            } else {
-                this.destination = this.session.createQueue(name);
-            }
-        } catch (JMSException e) {
-            throw new InitializationException(e);
-        }
-    }
-
-    public JmsMessageProducer createProducer() {
-        return new JmsMessageProducer(this.session, this.destination);
-    }
-
-    public MessageConsumer createConsumer(BrokerMessageListener listener) {
-        return new MessageConsumer(this.session, this.destination, listener);
-    }
-
-
+    void sendMessage(String message, Header... headers);
 }

@@ -27,21 +27,19 @@ package be.yildiz.module.messaging;
 import be.yildiz.common.exeption.InitializationException;
 import be.yildiz.common.exeption.TechnicalException;
 
-import javax.jms.Destination;
-import javax.jms.JMSException;
+import javax.jms.*;
 import javax.jms.Message;
-import javax.jms.Session;
 
 /**
  * @author Grégory Van den Borre
  */
-public class MessageProducer {
+public class JmsMessageProducer implements AsyncMessageProducer {
 
     private final Session session;
 
-    private final javax.jms.MessageProducer producer;
+    private final MessageProducer producer;
 
-    MessageProducer(Session session, Destination destination) {
+    JmsMessageProducer(Session session, Destination destination) {
         try {
             this.session = session;
             this.producer = this.session.createProducer(destination);
@@ -50,6 +48,7 @@ public class MessageProducer {
         }
     }
 
+    @Override
     public void sendMessage(String message, Header... headers) {
         try {
             Message toSend = this.session.createTextMessage(message);
