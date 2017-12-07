@@ -48,7 +48,7 @@ public class MessageConsumer {
     MessageConsumer(Session session, Destination destination, BrokerMessageListener listener) {
         try {
             javax.jms.MessageConsumer consumer = session.createConsumer(destination);
-            consumer.setMessageListener((m) -> {
+            consumer.setMessageListener(m -> {
                         try {
                             Message message = new Message(
                                     ((TextMessage) m).getText(),
