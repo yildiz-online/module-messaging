@@ -7,11 +7,11 @@ environment:
 install:
   - ps: |
       Add-Type -AssemblyName System.IO.Compression.FileSystem
-      if (!(Test-Path -Path "C:\maven" )) {
-        (new-object System.Net.WebClient).DownloadFile('https://repo1.maven.org/maven2/org/apache/maven/apache-maven/3.5.0/apache-maven-3.5.0-bin.zip', 'C:\maven-bin.zip')
-        [System.IO.Compression.ZipFile]::ExtractToDirectory("C:\maven-bin.zip", "C:\maven")
+      if (!(Test-Path -Path "C:\maven3" )) {
+        (new-object System.Net.WebClient).DownloadFile('https://repo1.maven.org/maven2/org/apache/maven/apache-maven/3.5.2/apache-maven-3.5.2-bin.zip', 'C:\maven-bin.zip')
+        [System.IO.Compression.ZipFile]::ExtractToDirectory("C:\maven-bin.zip", "C:\maven3")
       }
-  - cmd: SET PATH=C:\maven\apache-maven-3.5.0\bin;%JAVA_HOME%\bin;%PATH:C:\Ruby193\bin;=%
+  - cmd: SET PATH=C:\maven3\apache-maven-3.5.2\bin;%JAVA_HOME%\bin;%PATH:C:\Ruby193\bin;=%
   - cmd: SET MAVEN_OPTS=-XX:MaxPermSize=1g -Xmx2g
   - cmd: SET JAVA_OPTS=-XX:MaxPermSize=1g -Xmx2g
   - cmd: mvn --version
@@ -21,4 +21,4 @@ build_script:
 test_script:
   - mvn verify -B -s settings.xml
 cache:
-  - C:\maven
+  - C:\maven3
