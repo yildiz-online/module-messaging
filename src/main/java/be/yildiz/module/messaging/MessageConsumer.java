@@ -24,8 +24,8 @@
 
 package be.yildiz.module.messaging;
 
-import be.yildiz.common.collections.Lists;
 import be.yildiz.common.exeption.TechnicalException;
+import be.yildizgames.common.collection.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
