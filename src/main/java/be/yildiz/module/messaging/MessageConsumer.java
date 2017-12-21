@@ -24,7 +24,6 @@
 
 package be.yildiz.module.messaging;
 
-import be.yildiz.common.exeption.TechnicalException;
 import be.yildizgames.common.collection.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,7 +60,7 @@ public class MessageConsumer {
                     }
             );
         } catch (JMSException e) {
-            throw new TechnicalException(e);
+            throw new MessagingException(e);
         }
     }
 

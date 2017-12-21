@@ -24,7 +24,7 @@
 
 package be.yildiz.module.messaging;
 
-import be.yildiz.common.exeption.InitializationException;
+import be.yildizgames.common.exception.technical.InitializationException;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.broker.BrokerService;
 import org.slf4j.Logger;

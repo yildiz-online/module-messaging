@@ -24,43 +24,39 @@
 
 package be.yildiz.module.messaging;
 
-import be.yildizgames.common.exception.technical.InitializationException;
+import be.yildizgames.common.util.PropertiesHelper;
 
-import javax.jms.Connection;
-import javax.jms.Destination;
-import javax.jms.JMSException;
-import javax.jms.Session;
+import java.util.Properties;
 
 /**
  * @author Grégory Van den Borre
  */
-public class BrokerMessageDestination {
+public class SimpleBrokerProperties implements BrokerProperties {
 
-    private final Session session;
+    private final String host;
 
-    private final Destination destination;
+    private final int port;
 
-    BrokerMessageDestination(Connection connection, String name, boolean topic) {
-        super();
-        try {
-            this.session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-            if(topic) {
-                this.destination = this.session.createTopic(name);
-            } else {
-                this.destination = this.session.createQueue(name);
-            }
-        } catch (JMSException e) {
-            throw new InitializationException(e);
-        }
+    private final String data;
+
+    public SimpleBrokerProperties(Properties properties) {
+        this.host = PropertiesHelper.getValue(properties, "broker.host");
+        this.port = PropertiesHelper.getIntValue(properties, "broker.port");
+        this.data = PropertiesHelper.getValue(properties,"broker.data");
     }
 
-    public JmsMessageProducer createProducer() {
-        return new JmsMessageProducer(this.session, this.destination);
+    @Override
+    public final String getBrokerHost() {
+        return this.host;
     }
 
-    public MessageConsumer createConsumer(BrokerMessageListener listener) {
-        return new MessageConsumer(this.session, this.destination, listener);
+    @Override
+    public final int getBrokerPort() {
+        return this.port;
     }
 
-
+    @Override
+    public final String getBrokerDataFolder() {
+        return this.data;
+    }
 }

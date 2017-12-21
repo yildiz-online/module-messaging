@@ -24,8 +24,8 @@
 
 package be.yildiz.module.messaging;
 
-import be.yildiz.common.exeption.InitializationException;
-import be.yildiz.common.exeption.TechnicalException;
+
+import be.yildizgames.common.exception.technical.InitializationException;
 
 import javax.jms.*;
 import javax.jms.Message;
@@ -61,7 +61,7 @@ public class JmsMessageProducer implements AsyncMessageProducer {
             }
             this.producer.send(toSend);
         } catch (JMSException e) {
-            throw new TechnicalException(e);
+            throw new MessagingException(e);
         }
     }
 }

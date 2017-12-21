@@ -24,41 +24,22 @@
 
 package be.yildiz.module.messaging;
 
-import be.yildiz.common.resource.PropertiesHelper;
-
-import java.io.File;
-import java.util.Properties;
+import be.yildizgames.common.exception.technical.TechnicalException;
 
 /**
  * @author Grégory Van den Borre
  */
-public class BrokerFileProperties implements BrokerProperties {
+public class MessagingException extends TechnicalException {
 
-    private final String host;
-
-    private final int port;
-
-    private final String data;
-
-    public BrokerFileProperties(String path) {
-        Properties properties = PropertiesHelper.getPropertiesFromFile(new File(path));
-        this.host = properties.getProperty("broker.host");
-        this.port = PropertiesHelper.getIntValue(properties, "broker.port");
-        this.data = properties.getProperty("broker.data");
+    MessagingException(String message, Exception cause) {
+        super(message, cause);
     }
 
-    @Override
-    public final String getBrokerHost() {
-        return this.host;
+    MessagingException(Exception cause) {
+        super(cause);
     }
 
-    @Override
-    public final int getBrokerPort() {
-        return this.port;
-    }
-
-    @Override
-    public final String getBrokerDataFolder() {
-        return this.data;
+    MessagingException(String s) {
+        super(s);
     }
 }
