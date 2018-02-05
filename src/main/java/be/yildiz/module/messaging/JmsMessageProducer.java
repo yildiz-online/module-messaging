@@ -1,7 +1,7 @@
 /*
  * This file is part of the Yildiz-Engine project, licenced under the MIT License  (MIT)
  *
- *  Copyright (c) 2017 Grégory Van den Borre
+ *  Copyright (c) 2018 Grégory Van den Borre
  *
  *  More infos available: https://www.yildiz-games.be
  *
@@ -28,7 +28,6 @@ package be.yildiz.module.messaging;
 import be.yildizgames.common.exception.technical.InitializationException;
 
 import javax.jms.*;
-import javax.jms.Message;
 
 /**
  * @author Grégory Van den Borre
