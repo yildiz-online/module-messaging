@@ -27,7 +27,12 @@ package be.yildiz.module.messaging;
 
 import be.yildizgames.common.exception.technical.InitializationException;
 
-import javax.jms.*;
+import javax.jms.Destination;
+import javax.jms.JMSException;
+import javax.jms.MessageProducer;
+import javax.jms.Session;
+import javax.jms.TextMessage;
+
 
 /**
  * @author Grégory Van den Borre
@@ -50,7 +55,7 @@ public class JmsMessageProducer implements AsyncMessageProducer {
     @Override
     public void sendMessage(String message, Header... headers) {
         try {
-            Message toSend = this.session.createTextMessage(message);
+            TextMessage toSend = this.session.createTextMessage(message);
             if(headers != null) {
                 for (Header h : headers) {
                     if (h.isCorrelationId()) {
