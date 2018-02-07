@@ -45,8 +45,7 @@ public class MessageConsumer {
     private final List<Message> messageReceived = Lists.newList();
 
     MessageConsumer(Session session, Destination destination, BrokerMessageListener listener) {
-        try {
-            javax.jms.MessageConsumer consumer = session.createConsumer(destination);
+        try (javax.jms.MessageConsumer consumer = session.createConsumer(destination)){
             consumer.setMessageListener(m -> {
                         try {
                             Message message = new Message(
