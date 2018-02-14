@@ -22,13 +22,13 @@
  *
  */
 
-package be.yildiz.module.messaging;
+package be.yildizgames.module.messaging;
 
 /**
  * @author Grégory Van den Borre
  */
-@FunctionalInterface
-public interface AsyncMessageProducer {
+public interface BrokerMessageListener {
 
-    void sendMessage(String message, Header... headers);
+    void messageReceived(Message message);
+
 }

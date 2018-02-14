@@ -22,34 +22,45 @@
  *
  */
 
-package be.yildiz.module.messaging;
+package be.yildizgames.module.messaging;
+
+import be.yildizgames.common.exception.technical.InitializationException;
 
 import javax.jms.Connection;
+import javax.jms.Destination;
 import javax.jms.JMSException;
+import javax.jms.Session;
 
-public abstract class Broker {
+/**
+ * @author Grégory Van den Borre
+ */
+public class BrokerMessageDestination {
 
-    private Connection connection;
+    private final Session session;
 
-    public final BrokerMessageDestination registerQueue(String name) {
-        return new BrokerMessageDestination(this.connection, name, false);
+    private final Destination destination;
+
+    BrokerMessageDestination(Connection connection, String name, boolean topic) {
+        super();
+        try {
+            this.session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+            if(topic) {
+                this.destination = this.session.createTopic(name);
+            } else {
+                this.destination = this.session.createQueue(name);
+            }
+        } catch (JMSException e) {
+            throw new InitializationException(e);
+        }
     }
 
-    public final BrokerMessageDestination registerTopic(String name) {
-        return new BrokerMessageDestination(this.connection, name, true);
+    public JmsMessageProducer createProducer() {
+        return new JmsMessageProducer(this.session, this.destination);
     }
 
-    protected final void initializeConnection(final Connection connection) {
-        this.connection = connection;
+    public MessageConsumer createConsumer(BrokerMessageListener listener) {
+        return new MessageConsumer(this.session, this.destination, listener);
     }
 
-    protected final void closeConnection() throws JMSException {
-        this.connection.close();
-    }
 
-    protected final void start() throws JMSException {
-        this.connection.start();
-    }
-
-    public abstract void close() throws Exception;
 }

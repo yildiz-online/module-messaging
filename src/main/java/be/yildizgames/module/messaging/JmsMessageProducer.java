@@ -22,52 +22,50 @@
  *
  */
 
-package be.yildiz.module.messaging;
+package be.yildizgames.module.messaging;
 
-import be.yildizgames.common.collection.Lists;
-import be.yildizgames.common.logging.LogFactory;
-import org.slf4j.Logger;
+
+import be.yildizgames.common.exception.technical.InitializationException;
 
 import javax.jms.Destination;
 import javax.jms.JMSException;
+import javax.jms.MessageProducer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
-import java.util.Collections;
-import java.util.List;
+
 
 /**
  * @author Grégory Van den Borre
  */
-public class MessageConsumer {
+public class JmsMessageProducer implements AsyncMessageProducer {
 
-    private final Logger logger = LogFactory.getInstance().getLogger(this.getClass());
+    private final Session session;
 
-    private final List<Message> messageReceived = Lists.newList();
+    private final MessageProducer producer;
 
-    MessageConsumer(Session session, Destination destination, BrokerMessageListener listener) {
-        try (javax.jms.MessageConsumer consumer = session.createConsumer(destination)){
-            consumer.setMessageListener(m -> {
-                        try {
-                            Message message = new Message(
-                                    ((TextMessage) m).getText(),
-                                    m.getJMSCorrelationID());
-                            this.messageReceived.add(message);
-                            listener.messageReceived(message);
-                        } catch (JMSException e) {
-                            logger.error("Error retrieving JMS message", e);
-                        }
-                    }
-            );
+    JmsMessageProducer(Session session, Destination destination) {
+        try {
+            this.session = session;
+            this.producer = this.session.createProducer(destination);
         } catch (JMSException e) {
-            throw new MessagingException(e);
+            throw new InitializationException(e);
         }
     }
 
-    public final List<Message> getMessageReceived() {
-        return Collections.unmodifiableList(this.messageReceived);
-    }
-
-    public final boolean hasMessage() {
-        return !this.messageReceived.isEmpty();
+    @Override
+    public void sendMessage(String message, Header... headers) {
+        try {
+            TextMessage toSend = this.session.createTextMessage(message);
+            if(headers != null) {
+                for (Header h : headers) {
+                    if (h.isCorrelationId()) {
+                        toSend.setJMSCorrelationID(h.getValue());
+                    }
+                }
+            }
+            this.producer.send(toSend);
+        } catch (JMSException e) {
+            throw new MessagingException(e);
+        }
     }
 }

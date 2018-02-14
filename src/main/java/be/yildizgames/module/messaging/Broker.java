@@ -22,34 +22,34 @@
  *
  */
 
-package be.yildiz.module.messaging;
+package be.yildizgames.module.messaging;
 
-/**
- * @author Grégory Van den Borre
- */
-public class Message {
+import javax.jms.Connection;
+import javax.jms.JMSException;
 
-    private final String text;
+public abstract class Broker {
 
-    private final String correlationId;
+    private Connection connection;
 
-    Message(final String text, final String correlationId) {
-        assert text != null;
-        assert correlationId != null;
-        this.text = text;
-        this.correlationId = correlationId;
+    public final BrokerMessageDestination registerQueue(String name) {
+        return new BrokerMessageDestination(this.connection, name, false);
     }
 
-    public final String getText() {
-        return this.text;
+    public final BrokerMessageDestination registerTopic(String name) {
+        return new BrokerMessageDestination(this.connection, name, true);
     }
 
-    public final String getCorrelationId() {
-        return this.correlationId;
+    protected final void initializeConnection(final Connection connection) {
+        this.connection = connection;
     }
 
-    @Override
-    public final String toString() {
-        return this.getText();
+    protected final void closeConnection() throws JMSException {
+        this.connection.close();
     }
+
+    protected final void start() throws JMSException {
+        this.connection.start();
+    }
+
+    public abstract void close() throws Exception;
 }

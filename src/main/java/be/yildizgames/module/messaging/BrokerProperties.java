@@ -22,13 +22,16 @@
  *
  */
 
-package be.yildiz.module.messaging;
+package be.yildizgames.module.messaging;
 
 /**
  * @author Grégory Van den Borre
  */
-public interface BrokerMessageListener {
+public interface BrokerProperties {
 
-    void messageReceived(Message message);
+    String getBrokerHost();
 
+    int getBrokerPort();
+
+    String getBrokerDataFolder();
 }

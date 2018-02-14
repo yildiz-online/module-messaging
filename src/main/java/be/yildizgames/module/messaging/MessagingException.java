@@ -22,16 +22,24 @@
  *
  */
 
-package be.yildiz.module.messaging;
+package be.yildizgames.module.messaging;
+
+import be.yildizgames.common.exception.technical.TechnicalException;
 
 /**
  * @author Grégory Van den Borre
  */
-public interface BrokerProperties {
+public class MessagingException extends TechnicalException {
 
-    String getBrokerHost();
+    MessagingException(String message, Exception cause) {
+        super(message, cause);
+    }
 
-    int getBrokerPort();
+    MessagingException(Exception cause) {
+        super(cause);
+    }
 
-    String getBrokerDataFolder();
+    MessagingException(String s) {
+        super(s);
+    }
 }

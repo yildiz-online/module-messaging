@@ -22,41 +22,37 @@
  *
  */
 
-package be.yildiz.module.messaging;
-
-import be.yildizgames.common.util.PropertiesHelper;
-
-import java.util.Properties;
+package be.yildizgames.module.messaging;
 
 /**
  * @author Grégory Van den Borre
  */
-public class SimpleBrokerProperties implements BrokerProperties {
+public class Header {
 
-    private final String host;
+    private static final String CORRELATION_ID = "correlationId";
 
-    private final int port;
+    private final String key;
 
-    private final String data;
+    private final String value;
 
-    public SimpleBrokerProperties(Properties properties) {
-        this.host = PropertiesHelper.getValue(properties, "broker.host");
-        this.port = PropertiesHelper.getIntValue(properties, "broker.port");
-        this.data = PropertiesHelper.getValue(properties,"broker.data");
+    private Header(String key, String value) {
+        this.key = key;
+        this.value = value;
     }
 
-    @Override
-    public final String getBrokerHost() {
-        return this.host;
+    public static Header correlationId(String value) {
+        return new Header(CORRELATION_ID, value);
     }
 
-    @Override
-    public final int getBrokerPort() {
-        return this.port;
+    public final boolean isCorrelationId() {
+        return this.key.equals(CORRELATION_ID);
     }
 
-    @Override
-    public final String getBrokerDataFolder() {
-        return this.data;
+    public final String getKey() {
+        return key;
+    }
+
+    public final String getValue() {
+        return value;
     }
 }

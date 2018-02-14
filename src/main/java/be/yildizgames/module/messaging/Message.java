@@ -22,24 +22,34 @@
  *
  */
 
-package be.yildiz.module.messaging;
-
-import be.yildizgames.common.exception.technical.TechnicalException;
+package be.yildizgames.module.messaging;
 
 /**
  * @author Grégory Van den Borre
  */
-public class MessagingException extends TechnicalException {
+public class Message {
 
-    MessagingException(String message, Exception cause) {
-        super(message, cause);
+    private final String text;
+
+    private final String correlationId;
+
+    Message(final String text, final String correlationId) {
+        assert text != null;
+        assert correlationId != null;
+        this.text = text;
+        this.correlationId = correlationId;
     }
 
-    MessagingException(Exception cause) {
-        super(cause);
+    public final String getText() {
+        return this.text;
     }
 
-    MessagingException(String s) {
-        super(s);
+    public final String getCorrelationId() {
+        return this.correlationId;
+    }
+
+    @Override
+    public final String toString() {
+        return this.getText();
     }
 }

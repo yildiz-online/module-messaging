@@ -22,45 +22,52 @@
  *
  */
 
-package be.yildiz.module.messaging;
+package be.yildizgames.module.messaging;
 
-import be.yildizgames.common.exception.technical.InitializationException;
+import be.yildizgames.common.collection.Lists;
+import be.yildizgames.common.logging.LogFactory;
+import org.slf4j.Logger;
 
-import javax.jms.Connection;
 import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.Session;
+import javax.jms.TextMessage;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author Grégory Van den Borre
  */
-public class BrokerMessageDestination {
+public class MessageConsumer {
 
-    private final Session session;
+    private final Logger logger = LogFactory.getInstance().getLogger(this.getClass());
 
-    private final Destination destination;
+    private final List<Message> messageReceived = Lists.newList();
 
-    BrokerMessageDestination(Connection connection, String name, boolean topic) {
-        super();
-        try {
-            this.session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-            if(topic) {
-                this.destination = this.session.createTopic(name);
-            } else {
-                this.destination = this.session.createQueue(name);
-            }
+    MessageConsumer(Session session, Destination destination, BrokerMessageListener listener) {
+        try (javax.jms.MessageConsumer consumer = session.createConsumer(destination)){
+            consumer.setMessageListener(m -> {
+                        try {
+                            Message message = new Message(
+                                    ((TextMessage) m).getText(),
+                                    m.getJMSCorrelationID());
+                            this.messageReceived.add(message);
+                            listener.messageReceived(message);
+                        } catch (JMSException e) {
+                            logger.error("Error retrieving JMS message", e);
+                        }
+                    }
+            );
         } catch (JMSException e) {
-            throw new InitializationException(e);
+            throw new MessagingException(e);
         }
     }
 
-    public JmsMessageProducer createProducer() {
-        return new JmsMessageProducer(this.session, this.destination);
+    public final List<Message> getMessageReceived() {
+        return Collections.unmodifiableList(this.messageReceived);
     }
 
-    public MessageConsumer createConsumer(BrokerMessageListener listener) {
-        return new MessageConsumer(this.session, this.destination, listener);
+    public final boolean hasMessage() {
+        return !this.messageReceived.isEmpty();
     }
-
-
 }
