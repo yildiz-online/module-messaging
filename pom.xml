@@ -55,11 +55,6 @@
     </dependency>
     <dependency>
       <groupId>be.yildiz-games</groupId>
-      <artifactId>common-collection</artifactId>
-      <version>1.0.0</version>
-    </dependency>
-    <dependency>
-      <groupId>be.yildiz-games</groupId>
       <artifactId>common-util</artifactId>
       <version>1.0.0-SNAPSHOT</version>
     </dependency>

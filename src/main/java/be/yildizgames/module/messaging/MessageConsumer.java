@@ -24,7 +24,6 @@
 
 package be.yildizgames.module.messaging;
 
-import be.yildizgames.common.collection.Lists;
 import be.yildizgames.common.logging.LogFactory;
 import org.slf4j.Logger;
 
@@ -32,6 +31,7 @@ import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.Session;
 import javax.jms.TextMessage;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -42,7 +42,7 @@ public class MessageConsumer {
 
     private final Logger logger = LogFactory.getInstance().getLogger(this.getClass());
 
-    private final List<Message> messageReceived = Lists.newList();
+    private final List<Message> messageReceived = new ArrayList<>();
 
     MessageConsumer(Session session, Destination destination, BrokerMessageListener listener) {
         try (javax.jms.MessageConsumer consumer = session.createConsumer(destination)){
