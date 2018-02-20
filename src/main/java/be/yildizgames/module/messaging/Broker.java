@@ -24,12 +24,36 @@
 
 package be.yildizgames.module.messaging;
 
+import be.yildizgames.common.exception.technical.InitializationException;
+
 import javax.jms.Connection;
 import javax.jms.JMSException;
+import java.util.ServiceLoader;
 
 public abstract class Broker {
 
     private Connection connection;
+
+    protected Broker() {
+        super();
+    }
+
+    public static Broker getBroker(BrokerProperties p) {
+        return getBrokerProvider().initialize(p);
+    }
+
+    public static Broker getBroker(String host, int port) {
+        return getBrokerProvider().initialize(host, port);
+    }
+
+    public static Broker getBroker(String name, BrokerProperties p) {
+        return getBrokerProvider().initializeInternal(name, p);
+    }
+
+    private static BrokerProvider getBrokerProvider() {
+        ServiceLoader<BrokerProvider> provider = ServiceLoader.load(BrokerProvider.class);
+        return provider.findFirst().orElseThrow(() -> new InitializationException("Missing broker implementation"));
+    }
 
     public final BrokerMessageDestination registerQueue(String name) {
         return new BrokerMessageDestination(this.connection, name, false);
