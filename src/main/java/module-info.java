@@ -23,11 +23,13 @@
  */
 
 module be.yildizgames.module.messaging {
-    requires javax.jms.api;
-    requires slf4j.api;
+
     requires be.yildizgames.common.logging;
     requires be.yildizgames.common.util;
     requires be.yildizgames.common.exception;
+
+    requires javax.jms.api;
+    requires slf4j.api;
 
     exports be.yildizgames.module.messaging;
 }
