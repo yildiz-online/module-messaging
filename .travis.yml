@@ -1,8 +1,10 @@
-language: java
-jdk:
-  - oraclejdk9
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker pull moussavdb/build-java
 
 script:
-  - mvn -V -B -s settings.xml test
-install:
-  - mvn -V -B -s settings.xml clean install
+  - docker run -v $PWD:/src -w /src moussavdb/build-java mvn -V -s settings.xml org.jacoco:jacoco-maven-plugin:prepare-agent clean install sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=$SONAR_ORGANIZATION -Dsonar.login=$SONAR
