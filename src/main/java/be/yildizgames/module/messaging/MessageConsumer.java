@@ -25,6 +25,7 @@
 package be.yildizgames.module.messaging;
 
 import be.yildizgames.common.logging.LogFactory;
+import be.yildizgames.module.messaging.exception.MessagingException;
 import org.slf4j.Logger;
 
 import javax.jms.Destination;

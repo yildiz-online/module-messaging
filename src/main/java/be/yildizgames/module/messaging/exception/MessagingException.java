@@ -22,7 +22,7 @@
  *
  */
 
-package be.yildizgames.module.messaging;
+package be.yildizgames.module.messaging.exception;
 
 import be.yildizgames.common.exception.technical.TechnicalException;
 
@@ -35,7 +35,7 @@ public class MessagingException extends TechnicalException {
         super(message, cause);
     }
 
-    MessagingException(Exception cause) {
+    public MessagingException(Exception cause) {
         super(cause);
     }
 

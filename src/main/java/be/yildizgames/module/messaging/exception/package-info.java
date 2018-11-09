@@ -22,51 +22,8 @@
  *
  */
 
-package be.yildizgames.module.messaging;
-
-
-import be.yildizgames.common.exception.technical.InitializationException;
-import be.yildizgames.module.messaging.exception.MessagingException;
-
-import javax.jms.Destination;
-import javax.jms.JMSException;
-import javax.jms.MessageProducer;
-import javax.jms.Session;
-import javax.jms.TextMessage;
-
-
 /**
+ * Contains the messaging exception specific classes.
  * @author Grégory Van den Borre
  */
-public class JmsMessageProducer implements AsyncMessageProducer {
-
-    private final Session session;
-
-    private final MessageProducer producer;
-
-    JmsMessageProducer(Session session, Destination destination) {
-        try {
-            this.session = session;
-            this.producer = this.session.createProducer(destination);
-        } catch (JMSException e) {
-            throw new InitializationException(e);
-        }
-    }
-
-    @Override
-    public void sendMessage(String message, Header... headers) {
-        try {
-            TextMessage toSend = this.session.createTextMessage(message);
-            if(headers != null) {
-                for (Header h : headers) {
-                    if (h.isCorrelationId()) {
-                        toSend.setJMSCorrelationID(h.getValue());
-                    }
-                }
-            }
-            this.producer.send(toSend);
-        } catch (JMSException e) {
-            throw new MessagingException(e);
-        }
-    }
-}
+package be.yildizgames.module.messaging.exception;
