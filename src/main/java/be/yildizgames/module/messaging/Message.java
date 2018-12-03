@@ -24,6 +24,8 @@
 
 package be.yildizgames.module.messaging;
 
+import be.yildizgames.common.exception.implementation.ImplementationException;
+
 /**
  * @author Grégory Van den Borre
  */
@@ -34,8 +36,9 @@ public class Message {
     private final String correlationId;
 
     Message(final String text, final String correlationId) {
-        assert text != null;
-        assert correlationId != null;
+        super();
+        ImplementationException.throwForNull(text);
+        ImplementationException.throwForNull(correlationId);
         this.text = text;
         this.correlationId = correlationId;
     }

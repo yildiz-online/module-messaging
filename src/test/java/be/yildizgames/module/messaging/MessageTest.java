@@ -21,41 +21,34 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE  SOFTWARE.
  *
  */
-
 package be.yildizgames.module.messaging;
 
 import be.yildizgames.common.exception.implementation.ImplementationException;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 
-/**
- * @author Grégory Van den Borre
- */
-public class Header {
+class MessageTest {
 
-    private static final String CORRELATION_ID = "correlationId";
+    @Nested
+    class Constructor {
 
-    private final String key;
+        @Test
+        void happyFlow() {
+            Message m = new Message("text_ok", "cId");
+            Assertions.assertEquals("text_ok", m.getText());
+            Assertions.assertEquals("cId", m.getCorrelationId());
+        }
 
-    private final String value;
+        @Test
+        void withNullText() {
+            Assertions.assertThrows(ImplementationException.class, () -> new Message(null, "cId"));
+        }
 
-    private Header(String key, String value) {
-        ImplementationException.throwForNull(value);
-        this.key = key;
-        this.value = value;
+        @Test
+        void withNullCorrelationId() {
+            Assertions.assertThrows(ImplementationException.class, () -> new Message("text_ok", null));
+        }
     }
 
-    public static Header correlationId(String value) {
-        return new Header(CORRELATION_ID, value);
-    }
-
-    public final boolean isCorrelationId() {
-        return this.key.equals(CORRELATION_ID);
-    }
-
-    public final String getKey() {
-        return key;
-    }
-
-    public final String getValue() {
-        return value;
-    }
 }

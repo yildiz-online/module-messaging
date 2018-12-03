@@ -21,41 +21,31 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE  SOFTWARE.
  *
  */
-
 package be.yildizgames.module.messaging;
 
 import be.yildizgames.common.exception.implementation.ImplementationException;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 
-/**
- * @author Grégory Van den Borre
- */
-public class Header {
+class HeaderTest {
 
-    private static final String CORRELATION_ID = "correlationId";
+    @Nested
+    class CorrelationId {
 
-    private final String key;
+        @Test
+        void happyFlow() {
+            Header h = Header.correlationId("a1");
+            Assertions.assertTrue(h.isCorrelationId());
+            Assertions.assertEquals("correlationId", h.getKey());
+            Assertions.assertEquals("a1", h.getValue());
+        }
 
-    private final String value;
+        @Test
+        void nullParam() {
+            Assertions.assertThrows(ImplementationException.class, () -> Header.correlationId(null));
+        }
 
-    private Header(String key, String value) {
-        ImplementationException.throwForNull(value);
-        this.key = key;
-        this.value = value;
     }
 
-    public static Header correlationId(String value) {
-        return new Header(CORRELATION_ID, value);
-    }
-
-    public final boolean isCorrelationId() {
-        return this.key.equals(CORRELATION_ID);
-    }
-
-    public final String getKey() {
-        return key;
-    }
-
-    public final String getValue() {
-        return value;
-    }
 }
