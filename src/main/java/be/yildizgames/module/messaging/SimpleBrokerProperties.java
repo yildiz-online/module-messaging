@@ -24,6 +24,7 @@
 
 package be.yildizgames.module.messaging;
 
+import be.yildizgames.common.exception.implementation.ImplementationException;
 import be.yildizgames.common.util.PropertiesHelper;
 
 import java.util.Properties;
@@ -40,6 +41,7 @@ public class SimpleBrokerProperties implements BrokerProperties {
     private final String data;
 
     public SimpleBrokerProperties(Properties properties) {
+        ImplementationException.throwForNull(properties);
         this.host = PropertiesHelper.getValue(properties, "broker.host");
         this.port = PropertiesHelper.getIntValue(properties, "broker.port");
         this.data = PropertiesHelper.getValue(properties,"broker.data");
