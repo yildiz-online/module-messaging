@@ -51,4 +51,15 @@ class MessageTest {
         }
     }
 
+    @Nested
+    class ToString {
+
+        @Test
+        void happyFlow() {
+            Message m = new Message("text_ok", "cId");
+            Assertions.assertEquals("text_ok", m.toString());
+        }
+
+    }
+
 }
