@@ -44,7 +44,7 @@ class SimpleBrokerPropertiesTest {
             p.put("broker.data", "value3");
             BrokerProperties bp = new SimpleBrokerProperties(p);
             Assertions.assertEquals("value1", bp.getBrokerHost());
-            Assertions.assertEquals("1", bp.getBrokerPort());
+            Assertions.assertEquals(1, bp.getBrokerPort());
             Assertions.assertEquals("value3", bp.getBrokerDataFolder());
         }
 
