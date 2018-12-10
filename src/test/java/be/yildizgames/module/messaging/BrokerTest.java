@@ -24,7 +24,6 @@
 package be.yildizgames.module.messaging;
 
 import be.yildizgames.common.exception.implementation.ImplementationException;
-import be.yildizgames.common.exception.technical.InitializationException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -36,17 +35,17 @@ class BrokerTest {
 
         @Test
         void noImplementationHostPort() {
-            Assertions.assertThrows(InitializationException.class, () -> Broker.getBroker("", 0));
+            Assertions.assertThrows(ImplementationException.class, () -> Broker.getBroker("", 0));
         }
 
         @Test
         void noImplementationProperties() {
-            Assertions.assertThrows(InitializationException.class, () -> Broker.getBroker(new SimpleBrokerProperties(new DummyProperties().p)));
+            Assertions.assertThrows(ImplementationException.class, () -> Broker.getBroker(new SimpleBrokerProperties(new DummyProperties().p)));
         }
 
         @Test
         void noImplementationNameProperties() {
-            Assertions.assertThrows(InitializationException.class, () -> Broker.getBroker("test", new SimpleBrokerProperties(new DummyProperties().p)));
+            Assertions.assertThrows(ImplementationException.class, () -> Broker.getBroker("test", new SimpleBrokerProperties(new DummyProperties().p)));
         }
 
         @Test

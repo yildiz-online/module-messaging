@@ -25,14 +25,9 @@
 package be.yildizgames.module.messaging;
 
 
-import be.yildizgames.common.exception.technical.InitializationException;
 import be.yildizgames.module.messaging.exception.MessagingException;
 
-import javax.jms.Destination;
-import javax.jms.JMSException;
-import javax.jms.MessageProducer;
-import javax.jms.Session;
-import javax.jms.TextMessage;
+import javax.jms.*;
 
 
 /**
@@ -49,7 +44,7 @@ public class JmsMessageProducer implements AsyncMessageProducer {
             this.session = session;
             this.producer = this.session.createProducer(destination);
         } catch (JMSException e) {
-            throw new InitializationException(e);
+            throw new MessagingException(e);
         }
     }
 

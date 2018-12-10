@@ -25,7 +25,6 @@
 package be.yildizgames.module.messaging;
 
 import be.yildizgames.common.exception.implementation.ImplementationException;
-import be.yildizgames.common.exception.technical.InitializationException;
 
 import javax.jms.Connection;
 import javax.jms.JMSException;
@@ -56,7 +55,7 @@ public abstract class Broker {
 
     private static BrokerProvider getBrokerProvider() {
         ServiceLoader<BrokerProvider> provider = ServiceLoader.load(BrokerProvider.class);
-        return provider.findFirst().orElseThrow(() -> new InitializationException("Missing broker implementation"));
+        return provider.findFirst().orElseThrow(() -> ImplementationException.missingImplementation("broker"));
     }
 
     public final BrokerMessageDestination registerQueue(String name) {

@@ -24,7 +24,7 @@
 
 package be.yildizgames.module.messaging;
 
-import be.yildizgames.common.exception.technical.InitializationException;
+import be.yildizgames.module.messaging.exception.MessagingException;
 
 import javax.jms.Connection;
 import javax.jms.Destination;
@@ -50,7 +50,7 @@ public class BrokerMessageDestination {
                 this.destination = this.session.createQueue(name);
             }
         } catch (JMSException e) {
-            throw new InitializationException(e);
+            throw new MessagingException(e);
         }
     }
 
