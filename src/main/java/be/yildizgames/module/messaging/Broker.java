@@ -24,6 +24,7 @@
 
 package be.yildizgames.module.messaging;
 
+import be.yildizgames.common.exception.implementation.ImplementationException;
 import be.yildizgames.common.exception.technical.InitializationException;
 
 import javax.jms.Connection;
@@ -39,6 +40,7 @@ public abstract class Broker {
     }
 
     public static Broker getBroker(BrokerProperties p) {
+        ImplementationException.throwForNull(p);
         return getBrokerProvider().initialize(p);
     }
 
@@ -47,6 +49,8 @@ public abstract class Broker {
     }
 
     public static Broker getBroker(String name, BrokerProperties p) {
+        ImplementationException.throwForNull(name);
+        ImplementationException.throwForNull(p);
         return getBrokerProvider().initializeInternal(name, p);
     }
 

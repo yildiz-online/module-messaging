@@ -24,64 +24,46 @@
 package be.yildizgames.module.messaging;
 
 import be.yildizgames.common.exception.implementation.ImplementationException;
-import be.yildizgames.common.util.PropertiesException;
+import be.yildizgames.common.exception.technical.InitializationException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import java.util.Properties;
-
-class SimpleBrokerPropertiesTest {
+class BrokerTest {
 
     @Nested
-    class Constructor {
+    class getBroker {
 
         @Test
-        void happyFlow() {
-
-            BrokerProperties bp = new SimpleBrokerProperties(new DummyProperties().p);
-            Assertions.assertEquals("value1", bp.getBrokerHost());
-            Assertions.assertEquals(1, bp.getBrokerPort());
-            Assertions.assertEquals("value3", bp.getBrokerDataFolder());
+        void noImplementationHostPort() {
+            Assertions.assertThrows(InitializationException.class, () -> Broker.getBroker("", 0));
         }
 
         @Test
-        void nullParameter() {
-            Assertions.assertThrows(ImplementationException.class, () -> new SimpleBrokerProperties(null));
+        void noImplementationProperties() {
+            Assertions.assertThrows(InitializationException.class, () -> Broker.getBroker(new SimpleBrokerProperties(new DummyProperties().p)));
         }
 
         @Test
-        void noHost() {
-            Properties p = new Properties();
-            p.put("broker.port", "1");
-            p.put("broker.data", "value");
-            Assertions.assertThrows(PropertiesException.class, () -> new SimpleBrokerProperties(p));
+        void noImplementationNameProperties() {
+            Assertions.assertThrows(InitializationException.class, () -> Broker.getBroker("test", new SimpleBrokerProperties(new DummyProperties().p)));
         }
 
         @Test
-        void noPort() {
-            Properties p = new Properties();
-            p.put("broker.host", "value");
-            p.put("broker.data", "value");
-            Assertions.assertThrows(PropertiesException.class, () -> new SimpleBrokerProperties(p));
+        void noProperties() {
+            Assertions.assertThrows(ImplementationException.class, () -> Broker.getBroker(null));
         }
 
         @Test
-        void invalidPort() {
-            Properties p = new Properties();
-            p.put("broker.host", "value1");
-            p.put("broker.port", "v");
-            p.put("broker.data", "value3");
-            Assertions.assertThrows(PropertiesException.class, () -> new SimpleBrokerProperties(p));
+        void noName() {
+            Assertions.assertThrows(ImplementationException.class, () -> Broker.getBroker(null, new SimpleBrokerProperties(new DummyProperties().p)));
         }
 
         @Test
-        void noData() {
-            Properties p = new Properties();
-            p.put("broker.host", "value");
-            p.put("broker.port", "1");
-            Assertions.assertThrows(PropertiesException.class, () -> new SimpleBrokerProperties(p));
+        void nameNoProperties() {
+            Assertions.assertThrows(ImplementationException.class, () -> Broker.getBroker("test", null));
         }
 
     }
+
 }
