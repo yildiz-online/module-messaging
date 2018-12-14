@@ -24,9 +24,9 @@
 
 package be.yildizgames.module.messaging;
 
-import be.yildizgames.common.logging.LogFactory;
 import be.yildizgames.module.messaging.exception.MessagingException;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.jms.Destination;
 import javax.jms.JMSException;
@@ -41,7 +41,7 @@ import java.util.List;
  */
 public class MessageConsumer {
 
-    private final Logger logger = LogFactory.getInstance().getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private final List<Message> messageReceived = new ArrayList<>();
 
