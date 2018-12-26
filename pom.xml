@@ -30,7 +30,7 @@
   <url>https://bitbucket.org/yildiz-engine-team/module-messaging</url>
 
   <artifactId>module-messaging</artifactId>
-  <version>1.0.2</version>
+  <version>1.0.3-SNAPSHOT</version>
 
   <packaging>jar</packaging>
   <inceptionYear>2017</inceptionYear>
