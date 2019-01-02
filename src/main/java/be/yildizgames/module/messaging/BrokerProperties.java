@@ -25,13 +25,26 @@
 package be.yildizgames.module.messaging;
 
 /**
+ * Properties required to initialize a broker.
  * @author Grégory Van den Borre
  */
 public interface BrokerProperties {
 
+    /**
+     * Provide the host where the broker is running.
+     * @return The host address.
+     */
     String getBrokerHost();
 
+    /**
+     * Provide the port where the broker is running.
+     * @return The port number.
+     */
     int getBrokerPort();
 
+    /**
+     * Provide the folder where the broker data are stored.
+     * @return The data folder.
+     */
     String getBrokerDataFolder();
 }
