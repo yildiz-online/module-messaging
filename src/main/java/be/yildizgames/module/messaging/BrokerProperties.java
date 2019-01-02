@@ -47,4 +47,10 @@ public interface BrokerProperties {
      * @return The data folder.
      */
     String getBrokerDataFolder();
+
+    /**
+     * If true, the broker will be embedded in the application.
+     * @return The flag to build embedded broker or not.
+     */
+    boolean getBrokerInternal();
 }

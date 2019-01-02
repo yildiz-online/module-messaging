@@ -39,7 +39,7 @@ class SimpleBrokerPropertiesTest {
         @Test
         void happyFlow() {
 
-            BrokerProperties bp = new SimpleBrokerProperties(new DummyProperties().p);
+            BrokerProperties bp = StandardBrokerProperties.fromProperties(new DummyProperties().p);
             Assertions.assertEquals("value1", bp.getBrokerHost());
             Assertions.assertEquals(1, bp.getBrokerPort());
             Assertions.assertEquals("value3", bp.getBrokerDataFolder());
@@ -47,7 +47,7 @@ class SimpleBrokerPropertiesTest {
 
         @Test
         void nullParameter() {
-            Assertions.assertThrows(ImplementationException.class, () -> new SimpleBrokerProperties(null));
+            Assertions.assertThrows(ImplementationException.class, () -> StandardBrokerProperties.fromProperties(null));
         }
 
         @Test
@@ -55,7 +55,7 @@ class SimpleBrokerPropertiesTest {
             Properties p = new Properties();
             p.put("broker.port", "1");
             p.put("broker.data", "value");
-            Assertions.assertThrows(PropertiesException.class, () -> new SimpleBrokerProperties(p));
+            Assertions.assertThrows(PropertiesException.class, () -> StandardBrokerProperties.fromProperties(p));
         }
 
         @Test
@@ -63,7 +63,7 @@ class SimpleBrokerPropertiesTest {
             Properties p = new Properties();
             p.put("broker.host", "value");
             p.put("broker.data", "value");
-            Assertions.assertThrows(PropertiesException.class, () -> new SimpleBrokerProperties(p));
+            Assertions.assertThrows(PropertiesException.class, () -> StandardBrokerProperties.fromProperties(p));
         }
 
         @Test
@@ -72,7 +72,7 @@ class SimpleBrokerPropertiesTest {
             p.put("broker.host", "value1");
             p.put("broker.port", "v");
             p.put("broker.data", "value3");
-            Assertions.assertThrows(PropertiesException.class, () -> new SimpleBrokerProperties(p));
+            Assertions.assertThrows(PropertiesException.class, () -> StandardBrokerProperties.fromProperties(p));
         }
 
         @Test
@@ -80,7 +80,7 @@ class SimpleBrokerPropertiesTest {
             Properties p = new Properties();
             p.put("broker.host", "value");
             p.put("broker.port", "1");
-            Assertions.assertThrows(PropertiesException.class, () -> new SimpleBrokerProperties(p));
+            Assertions.assertThrows(PropertiesException.class, () -> StandardBrokerProperties.fromProperties(p));
         }
 
     }

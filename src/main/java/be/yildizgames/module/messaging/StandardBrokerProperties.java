@@ -30,9 +30,11 @@ import be.yildizgames.common.util.PropertiesHelper;
 import java.util.Properties;
 
 /**
+ * Standard broker properties.
+ *
  * @author Grégory Van den Borre
  */
-public class SimpleBrokerProperties implements BrokerProperties {
+public class StandardBrokerProperties implements BrokerProperties {
 
     private final String host;
 
@@ -40,11 +42,28 @@ public class SimpleBrokerProperties implements BrokerProperties {
 
     private final String data;
 
-    public SimpleBrokerProperties(Properties properties) {
+    private final boolean internal;
+
+    private StandardBrokerProperties(Properties properties) {
         ImplementationException.throwForNull(properties);
         this.host = PropertiesHelper.getValue(properties, "broker.host");
         this.port = PropertiesHelper.getIntValue(properties, "broker.port");
         this.data = PropertiesHelper.getValue(properties,"broker.data");
+        this.internal = PropertiesHelper.getBooleanValue(properties,"broker.internal");
+    }
+
+    /**
+     * Build a standard broker properties.
+     * Expected keys are:
+     * broker.host: String
+     * broker.port: int
+     * broker.data: String path
+     * broker.internal: boolean
+     * @param properties Properties for the broker.
+     * @return The Broker properties.
+     */
+    public static BrokerProperties fromProperties(Properties properties) {
+        return new StandardBrokerProperties(properties);
     }
 
     @Override
@@ -60,5 +79,10 @@ public class SimpleBrokerProperties implements BrokerProperties {
     @Override
     public final String getBrokerDataFolder() {
         return this.data;
+    }
+
+    @Override
+    public final boolean getBrokerInternal() {
+        return this.internal;
     }
 }
