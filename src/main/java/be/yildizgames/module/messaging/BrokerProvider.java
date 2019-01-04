@@ -31,8 +31,22 @@ public interface BrokerProvider {
 
     Broker initialize(BrokerProperties properties);
 
+    /**
+     * @deprecated Use initialise from properties instead.
+     * @param host none
+     * @param port none
+     * @return none
+     */
+    @Deprecated
     Broker initialize(String host, int port);
 
+    /**
+     * @deprecated Use initialise from properties instead.
+     * @param name none
+     * @param properties none
+     * @return none
+     */
+    @Deprecated
     Broker initializeInternal(String name, BrokerProperties properties);
 
 
