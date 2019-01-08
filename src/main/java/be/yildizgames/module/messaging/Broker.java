@@ -30,23 +30,40 @@ import javax.jms.Connection;
 import javax.jms.JMSException;
 import java.util.ServiceLoader;
 
+/**
+ * The broker is the application to connect to, in order to use messaging.
+ * @author Grégory Van den Borre
+ */
 public abstract class Broker {
 
+    /**
+     * Connection to the broker system.
+     */
     private Connection connection;
 
+    /**
+     * Protected constructor.
+     */
     protected Broker() {
         super();
     }
 
+    /**
+     * Create a new Broker connection from properties configuration.
+     * @param p Properties for the broker connection configuration.
+     * @return The created instance.
+     */
     public static Broker getBroker(BrokerProperties p) {
         ImplementationException.throwForNull(p);
         return getBrokerProvider().initialize(p);
     }
 
+    @Deprecated
     public static Broker getBroker(String host, int port) {
         return getBrokerProvider().initialize(host, port);
     }
 
+    @Deprecated
     public static Broker getBroker(String name, BrokerProperties p) {
         ImplementationException.throwForNull(name);
         ImplementationException.throwForNull(p);
@@ -58,6 +75,11 @@ public abstract class Broker {
         return provider.findFirst().orElseThrow(() -> ImplementationException.missingImplementation("broker"));
     }
 
+    /**
+     * Register a queue destination, a queue contains message that are removed once consumed.
+     * @param name Queue unique name.
+     * @return The queue destination.
+     */
     public final BrokerMessageDestination registerQueue(String name) {
         return new BrokerMessageDestination(this.connection, name, false);
     }
