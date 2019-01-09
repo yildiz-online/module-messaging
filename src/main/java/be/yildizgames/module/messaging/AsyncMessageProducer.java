@@ -25,10 +25,16 @@
 package be.yildizgames.module.messaging;
 
 /**
+ * A producer can send asynchronous message.
  * @author Grégory Van den Borre
  */
 @FunctionalInterface
 public interface AsyncMessageProducer {
 
+    /**
+     * Send a message.
+     * @param message Message to send.
+     * @param headers Optional headers to add.
+     */
     void sendMessage(String message, Header... headers);
 }

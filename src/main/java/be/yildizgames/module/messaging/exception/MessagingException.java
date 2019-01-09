@@ -27,19 +27,33 @@ package be.yildizgames.module.messaging.exception;
 import be.yildizgames.common.exception.technical.TechnicalException;
 
 /**
+ * A technical exception when a messaging action fails.
  * @author Grégory Van den Borre
  */
 public class MessagingException extends TechnicalException {
 
+    /**
+     * Create a new instance.
+     * @param message Exception message.
+     * @param cause Root exception.
+     */
     MessagingException(String message, Exception cause) {
         super(message, cause);
     }
 
+    /**
+     * Create a new instance.
+     * @param cause Root exception.
+     */
     public MessagingException(Exception cause) {
         super(cause);
     }
 
-    MessagingException(String s) {
-        super(s);
+    /**
+     * Create a new instance.
+     * @param message Exception message.
+     */
+    MessagingException(String message) {
+        super(message);
     }
 }

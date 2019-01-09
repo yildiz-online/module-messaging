@@ -31,18 +31,18 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Properties;
 
-class SimpleBrokerPropertiesTest {
+class StandardBrokerPropertiesTest {
 
     @Nested
     class Constructor {
 
         @Test
         void happyFlow() {
-
             BrokerProperties bp = StandardBrokerProperties.fromProperties(new DummyProperties().p);
             Assertions.assertEquals("value1", bp.getBrokerHost());
             Assertions.assertEquals(1, bp.getBrokerPort());
             Assertions.assertEquals("value3", bp.getBrokerDataFolder());
+            Assertions.assertEquals(true, bp.getBrokerInternal());
         }
 
         @Test
@@ -55,6 +55,7 @@ class SimpleBrokerPropertiesTest {
             Properties p = new Properties();
             p.put("broker.port", "1");
             p.put("broker.data", "value");
+            p.put("broker.internal", "true");
             Assertions.assertThrows(PropertiesException.class, () -> StandardBrokerProperties.fromProperties(p));
         }
 
@@ -63,6 +64,7 @@ class SimpleBrokerPropertiesTest {
             Properties p = new Properties();
             p.put("broker.host", "value");
             p.put("broker.data", "value");
+            p.put("broker.internal", "true");
             Assertions.assertThrows(PropertiesException.class, () -> StandardBrokerProperties.fromProperties(p));
         }
 
@@ -72,6 +74,7 @@ class SimpleBrokerPropertiesTest {
             p.put("broker.host", "value1");
             p.put("broker.port", "v");
             p.put("broker.data", "value3");
+            p.put("broker.internal", "true");
             Assertions.assertThrows(PropertiesException.class, () -> StandardBrokerProperties.fromProperties(p));
         }
 
@@ -80,6 +83,16 @@ class SimpleBrokerPropertiesTest {
             Properties p = new Properties();
             p.put("broker.host", "value");
             p.put("broker.port", "1");
+            p.put("broker.internal", "true");
+            Assertions.assertThrows(PropertiesException.class, () -> StandardBrokerProperties.fromProperties(p));
+        }
+
+        @Test
+        void noInternal() {
+            Properties p = new Properties();
+            p.put("broker.host", "value");
+            p.put("broker.port", "1");
+            p.put("broker.data", "value3");
             Assertions.assertThrows(PropertiesException.class, () -> StandardBrokerProperties.fromProperties(p));
         }
 

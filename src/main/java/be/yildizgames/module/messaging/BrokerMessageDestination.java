@@ -32,14 +32,27 @@ import javax.jms.JMSException;
 import javax.jms.Session;
 
 /**
+ * A message destination wis the channel where the asynchronous messages go.
  * @author Grégory Van den Borre
  */
 public class BrokerMessageDestination {
 
+    /**
+     * Session to create the destination.
+     */
     private final Session session;
 
+    /**
+     * JMS destination.
+     */
     private final Destination destination;
 
+    /**
+     * Create a new destination.
+     * @param connection Connection to use to create a session.
+     * @param name Destination name.
+     * @param topic True will create a topic, false will create a queue.
+     */
     BrokerMessageDestination(Connection connection, String name, boolean topic) {
         super();
         try {
@@ -54,13 +67,20 @@ public class BrokerMessageDestination {
         }
     }
 
+    /**
+     * Create a new producer to send messages to this destination.
+     * @return The created producer.
+     */
     public JmsMessageProducer createProducer() {
         return new JmsMessageProducer(this.session, this.destination);
     }
 
+    /**
+     * Create a new consumer to retrieve messages from this destination.
+     * @param listener Logic to invoke when a message is received.
+     * @return The created consumer.
+     */
     public MessageConsumer createConsumer(BrokerMessageListener listener) {
         return new MessageConsumer(this.session, this.destination, listener);
     }
-
-
 }

@@ -25,6 +25,7 @@
 package be.yildizgames.module.messaging;
 
 import be.yildizgames.common.exception.implementation.ImplementationException;
+import be.yildizgames.module.messaging.exception.MessagingException;
 
 import javax.jms.Connection;
 import javax.jms.JMSException;
@@ -58,18 +59,34 @@ public abstract class Broker {
         return getBrokerProvider().initialize(p);
     }
 
-    @Deprecated
+    /**
+     * @deprecated Use getBroker(BrokerProperties p).
+     * @param host broker host.
+     * @param port broker port.
+     * @return the created instance
+     */
+    @Deprecated(since = "1.0.4", forRemoval = true)
     public static Broker getBroker(String host, int port) {
         return getBrokerProvider().initialize(host, port);
     }
 
-    @Deprecated
+    /**
+     * @deprecated Use getBroker(BrokerProperties p).
+     * @param name broker name.
+     * @param p broker properties.
+     * @return the created instance
+     */
+    @Deprecated(since = "1.0.4", forRemoval = true)
     public static Broker getBroker(String name, BrokerProperties p) {
         ImplementationException.throwForNull(name);
         ImplementationException.throwForNull(p);
         return getBrokerProvider().initializeInternal(name, p);
     }
 
+    /**
+     * Retrieve the broker provider from the service.
+     * @return The found broker provider.
+     */
     private static BrokerProvider getBrokerProvider() {
         ServiceLoader<BrokerProvider> provider = ServiceLoader.load(BrokerProvider.class);
         return provider.findFirst().orElseThrow(() -> ImplementationException.missingImplementation("broker"));
@@ -84,21 +101,40 @@ public abstract class Broker {
         return new BrokerMessageDestination(this.connection, name, false);
     }
 
+    /**
+     * Register a topic destination, a topic is a public subscribe channel..
+     * @param name Topic unique name.
+     * @return The topic destination.
+     */
     public final BrokerMessageDestination registerTopic(String name) {
         return new BrokerMessageDestination(this.connection, name, true);
     }
 
+    /**
+     * Prepare the connection to the broker.
+     */
     protected final void initializeConnection(final Connection connection) {
         this.connection = connection;
     }
 
+    /**
+     * Close the connection to the broker.
+     * @throws JMSException If the action fails.
+     */
     protected final void closeConnection() throws JMSException {
         this.connection.close();
     }
 
+    /**
+     * Start the broker connection.
+     * @throws JMSException If the connection fails.
+     */
     protected final void start() throws JMSException {
         this.connection.start();
     }
 
-    public abstract void close() throws Exception;
+    /**
+     * Close the connection to the broker.
+     */
+    public abstract void close() throws MessagingException;
 }
