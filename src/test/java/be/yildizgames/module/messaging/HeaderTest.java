@@ -35,7 +35,7 @@ class HeaderTest {
 
         @Test
         void happyFlow() {
-            Header h = Header.correlationId("a1");
+            BrokerMessageHeader h = BrokerMessageHeader.correlationId("a1");
             Assertions.assertTrue(h.isCorrelationId());
             Assertions.assertEquals("correlationId", h.getKey());
             Assertions.assertEquals("a1", h.getValue());
@@ -43,7 +43,7 @@ class HeaderTest {
 
         @Test
         void nullParam() {
-            Assertions.assertThrows(ImplementationException.class, () -> Header.correlationId(null));
+            Assertions.assertThrows(ImplementationException.class, () -> BrokerMessageHeader.correlationId(null));
         }
 
     }

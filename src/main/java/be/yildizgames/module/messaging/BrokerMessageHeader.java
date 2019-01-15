@@ -24,44 +24,38 @@
 
 package be.yildizgames.module.messaging;
 
-
-import be.yildizgames.module.messaging.exception.MessagingException;
-
-import javax.jms.*;
-
+import be.yildizgames.common.exception.implementation.ImplementationException;
 
 /**
  * @author Grégory Van den Borre
  */
-public class JmsMessageProducer implements AsyncMessageProducer {
+public class BrokerMessageHeader {
 
-    private final Session session;
+    private static final String CORRELATION_ID = "correlationId";
 
-    private final MessageProducer producer;
+    private final String key;
 
-    JmsMessageProducer(Session session, Destination destination) {
-        try {
-            this.session = session;
-            this.producer = this.session.createProducer(destination);
-        } catch (JMSException e) {
-            throw new MessagingException(e);
-        }
+    private final String value;
+
+    private BrokerMessageHeader(String key, String value) {
+        ImplementationException.throwForNull(value);
+        this.key = key;
+        this.value = value;
     }
 
-    @Override
-    public void sendMessage(String message, Header... headers) {
-        try {
-            TextMessage toSend = this.session.createTextMessage(message);
-            if(headers != null) {
-                for (Header h : headers) {
-                    if (h.isCorrelationId()) {
-                        toSend.setJMSCorrelationID(h.getValue());
-                    }
-                }
-            }
-            this.producer.send(toSend);
-        } catch (JMSException e) {
-            throw new MessagingException(e);
-        }
+    public static BrokerMessageHeader correlationId(String value) {
+        return new BrokerMessageHeader(CORRELATION_ID, value);
+    }
+
+    public final boolean isCorrelationId() {
+        return this.key.equals(CORRELATION_ID);
+    }
+
+    public final String getKey() {
+        return key;
+    }
+
+    public final String getValue() {
+        return value;
     }
 }

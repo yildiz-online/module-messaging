@@ -71,8 +71,8 @@ public class BrokerMessageDestination {
      * Create a new producer to send messages to this destination.
      * @return The created producer.
      */
-    public JmsMessageProducer createProducer() {
-        return new JmsMessageProducer(this.session, this.destination);
+    public BrokerMessageProducer createProducer() {
+        return new BrokerMessageProducer(this.session, this.destination);
     }
 
     /**
@@ -80,7 +80,7 @@ public class BrokerMessageDestination {
      * @param listener Logic to invoke when a message is received.
      * @return The created consumer.
      */
-    public MessageConsumer createConsumer(BrokerMessageListener listener) {
-        return new MessageConsumer(this.session, this.destination, listener);
+    public BrokerMessageConsumer createConsumer(BrokerMessageListener listener) {
+        return new BrokerMessageConsumer(this.session, this.destination, listener);
     }
 }

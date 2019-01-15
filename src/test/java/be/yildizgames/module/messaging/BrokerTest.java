@@ -40,12 +40,12 @@ class BrokerTest {
 
         @Test
         void noImplementationProperties() {
-            Assertions.assertThrows(ImplementationException.class, () -> Broker.getBroker(StandardBrokerProperties.fromProperties(new DummyProperties().p)));
+            Assertions.assertThrows(ImplementationException.class, () -> Broker.getBroker(BrokerPropertiesStandard.fromProperties(new DummyProperties().p)));
         }
 
         @Test
         void noImplementationNameProperties() {
-            Assertions.assertThrows(ImplementationException.class, () -> Broker.getBroker("test", StandardBrokerProperties.fromProperties(new DummyProperties().p)));
+            Assertions.assertThrows(ImplementationException.class, () -> Broker.getBroker("test", BrokerPropertiesStandard.fromProperties(new DummyProperties().p)));
         }
 
         @Test
@@ -55,7 +55,7 @@ class BrokerTest {
 
         @Test
         void noName() {
-            Assertions.assertThrows(ImplementationException.class, () -> Broker.getBroker(null, StandardBrokerProperties.fromProperties(new DummyProperties().p)));
+            Assertions.assertThrows(ImplementationException.class, () -> Broker.getBroker(null, BrokerPropertiesStandard.fromProperties(new DummyProperties().p)));
         }
 
         @Test

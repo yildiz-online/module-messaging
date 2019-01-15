@@ -35,19 +35,19 @@ class MessageTest {
 
         @Test
         void happyFlow() {
-            Message m = new Message("text_ok", "cId");
+            BrokerMessage m = new BrokerMessage("text_ok", "cId");
             Assertions.assertEquals("text_ok", m.getText());
             Assertions.assertEquals("cId", m.getCorrelationId());
         }
 
         @Test
         void withNullText() {
-            Assertions.assertThrows(ImplementationException.class, () -> new Message(null, "cId"));
+            Assertions.assertThrows(ImplementationException.class, () -> new BrokerMessage(null, "cId"));
         }
 
         @Test
         void withNullCorrelationId() {
-            Assertions.assertThrows(ImplementationException.class, () -> new Message("text_ok", null));
+            Assertions.assertThrows(ImplementationException.class, () -> new BrokerMessage("text_ok", null));
         }
     }
 
@@ -56,7 +56,7 @@ class MessageTest {
 
         @Test
         void happyFlow() {
-            Message m = new Message("text_ok", "cId");
+            BrokerMessage m = new BrokerMessage("text_ok", "cId");
             Assertions.assertEquals("text_ok", m.toString());
         }
 

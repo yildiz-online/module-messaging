@@ -36,5 +36,5 @@ public interface AsyncMessageProducer {
      * @param message Message to send.
      * @param headers Optional headers to add.
      */
-    void sendMessage(String message, Header... headers);
+    void sendMessage(String message, BrokerMessageHeader... headers);
 }
