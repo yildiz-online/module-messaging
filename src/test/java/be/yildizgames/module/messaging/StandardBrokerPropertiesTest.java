@@ -31,13 +31,13 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Properties;
 
-class StandardBrokerPropertiesTest {
+public class StandardBrokerPropertiesTest {
 
     @Nested
-    class Constructor {
+    public class Constructor {
 
         @Test
-        void happyFlow() {
+        public void happyFlow() {
             BrokerProperties bp = StandardBrokerProperties.fromProperties(new DummyProperties().p);
             Assertions.assertEquals("value1", bp.getBrokerHost());
             Assertions.assertEquals(1, bp.getBrokerPort());
@@ -46,12 +46,12 @@ class StandardBrokerPropertiesTest {
         }
 
         @Test
-        void nullParameter() {
+        public void nullParameter() {
             Assertions.assertThrows(ImplementationException.class, () -> StandardBrokerProperties.fromProperties(null));
         }
 
         @Test
-        void noHost() {
+        public void noHost() {
             Properties p = new Properties();
             p.put("broker.port", "1");
             p.put("broker.data", "value");
@@ -60,7 +60,7 @@ class StandardBrokerPropertiesTest {
         }
 
         @Test
-        void noPort() {
+        public void noPort() {
             Properties p = new Properties();
             p.put("broker.host", "value");
             p.put("broker.data", "value");
@@ -69,7 +69,7 @@ class StandardBrokerPropertiesTest {
         }
 
         @Test
-        void invalidPort() {
+        public void invalidPort() {
             Properties p = new Properties();
             p.put("broker.host", "value1");
             p.put("broker.port", "v");
@@ -79,7 +79,7 @@ class StandardBrokerPropertiesTest {
         }
 
         @Test
-        void noData() {
+        public void noData() {
             Properties p = new Properties();
             p.put("broker.host", "value");
             p.put("broker.port", "1");
@@ -88,7 +88,7 @@ class StandardBrokerPropertiesTest {
         }
 
         @Test
-        void noInternal() {
+        public void noInternal() {
             Properties p = new Properties();
             p.put("broker.host", "value");
             p.put("broker.port", "1");
