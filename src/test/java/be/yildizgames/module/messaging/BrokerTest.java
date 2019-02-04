@@ -28,38 +28,38 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-class BrokerTest {
+public class BrokerTest {
 
     @Nested
-    class getBroker {
+    public class getBroker {
 
         @Test
-        void noImplementationHostPort() {
+        public void noImplementationHostPort() {
             Assertions.assertThrows(ImplementationException.class, () -> Broker.getBroker("", 0));
         }
 
         @Test
-        void noImplementationProperties() {
+        public void noImplementationProperties() {
             Assertions.assertThrows(ImplementationException.class, () -> Broker.getBroker(StandardBrokerProperties.fromProperties(new DummyProperties().p)));
         }
 
         @Test
-        void noImplementationNameProperties() {
+        public void noImplementationNameProperties() {
             Assertions.assertThrows(ImplementationException.class, () -> Broker.getBroker("test", StandardBrokerProperties.fromProperties(new DummyProperties().p)));
         }
 
         @Test
-        void noProperties() {
+        public void noProperties() {
             Assertions.assertThrows(ImplementationException.class, () -> Broker.getBroker(null));
         }
 
         @Test
-        void noName() {
+        public void noName() {
             Assertions.assertThrows(ImplementationException.class, () -> Broker.getBroker(null, StandardBrokerProperties.fromProperties(new DummyProperties().p)));
         }
 
         @Test
-        void nameNoProperties() {
+        public void nameNoProperties() {
             Assertions.assertThrows(ImplementationException.class, () -> Broker.getBroker("test", null));
         }
 
