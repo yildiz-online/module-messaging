@@ -28,34 +28,34 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-class MessageTest {
+public class MessageTest {
 
     @Nested
-    class Constructor {
+    public class Constructor {
 
         @Test
-        void happyFlow() {
+        public void happyFlow() {
             Message m = new Message("text_ok", "cId");
             Assertions.assertEquals("text_ok", m.getText());
             Assertions.assertEquals("cId", m.getCorrelationId());
         }
 
         @Test
-        void withNullText() {
+        public void withNullText() {
             Assertions.assertThrows(ImplementationException.class, () -> new Message(null, "cId"));
         }
 
         @Test
-        void withNullCorrelationId() {
+        public void withNullCorrelationId() {
             Assertions.assertThrows(ImplementationException.class, () -> new Message("text_ok", null));
         }
     }
 
     @Nested
-    class ToString {
+    public class ToString {
 
         @Test
-        void happyFlow() {
+        public void happyFlow() {
             Message m = new Message("text_ok", "cId");
             Assertions.assertEquals("text_ok", m.toString());
         }
