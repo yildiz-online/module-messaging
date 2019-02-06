@@ -1,9 +1,9 @@
 /*
  * This file is part of the Yildiz-Engine project, licenced under the MIT License  (MIT)
  *
- *  Copyright (c) 2018 Grégory Van den Borre
+ *  Copyright (c) 2019 Grégory Van den Borre
  *
- *  More infos available: https://www.yildiz-games.be
+ *  More infos available: https://engine.yildiz-games.be
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  *  documentation files (the "Software"), to deal in the Software without restriction, including without
@@ -28,38 +28,38 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-class BrokerTest {
+public class BrokerTest {
 
     @Nested
-    class getBroker {
+    public class getBroker {
 
         @Test
-        void noImplementationHostPort() {
+        public void noImplementationHostPort() {
             Assertions.assertThrows(ImplementationException.class, () -> Broker.getBroker("", 0));
         }
 
         @Test
-        void noImplementationProperties() {
+        public void noImplementationProperties() {
             Assertions.assertThrows(ImplementationException.class, () -> Broker.getBroker(BrokerPropertiesStandard.fromProperties(new DummyProperties().p)));
         }
 
         @Test
-        void noImplementationNameProperties() {
+        public void noImplementationNameProperties() {
             Assertions.assertThrows(ImplementationException.class, () -> Broker.getBroker("test", BrokerPropertiesStandard.fromProperties(new DummyProperties().p)));
         }
 
         @Test
-        void noProperties() {
+        public void noProperties() {
             Assertions.assertThrows(ImplementationException.class, () -> Broker.getBroker(null));
         }
 
         @Test
-        void noName() {
+        public void noName() {
             Assertions.assertThrows(ImplementationException.class, () -> Broker.getBroker(null, BrokerPropertiesStandard.fromProperties(new DummyProperties().p)));
         }
 
         @Test
-        void nameNoProperties() {
+        public void nameNoProperties() {
             Assertions.assertThrows(ImplementationException.class, () -> Broker.getBroker("test", null));
         }
 
