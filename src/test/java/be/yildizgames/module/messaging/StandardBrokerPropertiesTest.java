@@ -1,9 +1,9 @@
 /*
  * This file is part of the Yildiz-Engine project, licenced under the MIT License  (MIT)
  *
- *  Copyright (c) 2018 Grégory Van den Borre
+ *  Copyright (c) 2019 Grégory Van den Borre
  *
- *  More infos available: https://www.yildiz-games.be
+ *  More infos available: https://engine.yildiz-games.be
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  *  documentation files (the "Software"), to deal in the Software without restriction, including without
@@ -31,13 +31,13 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Properties;
 
-class StandardBrokerPropertiesTest {
+public class StandardBrokerPropertiesTest {
 
     @Nested
-    class Constructor {
+    public class Constructor {
 
         @Test
-        void happyFlow() {
+        public void happyFlow() {
             BrokerProperties bp = BrokerPropertiesStandard.fromProperties(new DummyProperties().p);
             Assertions.assertEquals("value1", bp.getBrokerHost());
             Assertions.assertEquals(1, bp.getBrokerPort());
@@ -46,12 +46,12 @@ class StandardBrokerPropertiesTest {
         }
 
         @Test
-        void nullParameter() {
+        public void nullParameter() {
             Assertions.assertThrows(ImplementationException.class, () -> BrokerPropertiesStandard.fromProperties(null));
         }
 
         @Test
-        void noHost() {
+        public void noHost() {
             Properties p = new Properties();
             p.put("broker.port", "1");
             p.put("broker.data", "value");
@@ -60,7 +60,7 @@ class StandardBrokerPropertiesTest {
         }
 
         @Test
-        void noPort() {
+        public void noPort() {
             Properties p = new Properties();
             p.put("broker.host", "value");
             p.put("broker.data", "value");
@@ -69,7 +69,7 @@ class StandardBrokerPropertiesTest {
         }
 
         @Test
-        void invalidPort() {
+        public void invalidPort() {
             Properties p = new Properties();
             p.put("broker.host", "value1");
             p.put("broker.port", "v");
@@ -79,7 +79,7 @@ class StandardBrokerPropertiesTest {
         }
 
         @Test
-        void noData() {
+        public void noData() {
             Properties p = new Properties();
             p.put("broker.host", "value");
             p.put("broker.port", "1");
@@ -88,7 +88,7 @@ class StandardBrokerPropertiesTest {
         }
 
         @Test
-        void noInternal() {
+        public void noInternal() {
             Properties p = new Properties();
             p.put("broker.host", "value");
             p.put("broker.port", "1");
