@@ -29,6 +29,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+@Disabled
 public class MessageTest {
 
     @Nested
@@ -44,23 +45,23 @@ public class MessageTest {
 
         @Disabled
         @Test
-        void withNullText() {
+        public void withNullText() {
             Assertions.assertThrows(ImplementationException.class, () -> new BrokerMessage(null, "cId"));
         }
 
         @Disabled
         @Test
-        void withNullCorrelationId() {
+        public void withNullCorrelationId() {
             Assertions.assertThrows(ImplementationException.class, () -> new BrokerMessage("text_ok", null));
         }
     }
 
     @Nested
-    class ToString {
+    public class ToString {
 
         @Disabled
         @Test
-        void happyFlow() {
+        public void happyFlow() {
             BrokerMessage m = new BrokerMessage("text_ok", "cId");
             Assertions.assertEquals("text_ok", m.toString());
         }
