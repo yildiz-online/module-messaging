@@ -1,9 +1,9 @@
 /*
  * This file is part of the Yildiz-Engine project, licenced under the MIT License  (MIT)
  *
- *  Copyright (c) 2018 Grégory Van den Borre
+ *  Copyright (c) 2019 Grégory Van den Borre
  *
- *  More infos available: https://www.yildiz-games.be
+ *  More infos available: https://engine.yildiz-games.be
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  *  documentation files (the "Software"), to deal in the Software without restriction, including without
@@ -27,13 +27,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-class MessagingExceptionTest {
+public class MessagingExceptionTest {
 
     @Nested
-    class Constructor {
+    public class Constructor {
 
         @Test
-        void message() {
+        public void message() {
             MessagingException m = new MessagingException("a test message");
             Assertions.assertEquals("a test message", m.message);
             Assertions.assertEquals("a test message", m.getMessage());
@@ -41,7 +41,7 @@ class MessagingExceptionTest {
         }
 
         @Test
-        void rootCause() {
+        public void rootCause() {
             RuntimeException root = new RuntimeException("boum");
             MessagingException m = new MessagingException(root);
             Assertions.assertEquals(root, m.getCause());
@@ -49,7 +49,7 @@ class MessagingExceptionTest {
         }
 
         @Test
-        void messageAndCause() {
+        public void messageAndCause() {
             RuntimeException root = new RuntimeException("boum");
             MessagingException m = new MessagingException("a test message", root);
             Assertions.assertEquals("a test message", m.message);
