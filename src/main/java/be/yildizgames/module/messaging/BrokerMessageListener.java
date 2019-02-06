@@ -29,6 +29,6 @@ package be.yildizgames.module.messaging;
  */
 public interface BrokerMessageListener {
 
-    void messageReceived(Message message);
+    void messageReceived(BrokerMessage message);
 
 }
