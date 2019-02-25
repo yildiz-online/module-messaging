@@ -47,7 +47,8 @@ public class BrokerMessageConsumer {
     private final List<BrokerMessage> messageReceived = new ArrayList<>();
 
     BrokerMessageConsumer(Session session, Destination destination, BrokerMessageListener listener) {
-        try (MessageConsumer consumer = session.createConsumer(destination)){
+        try {
+            MessageConsumer consumer = session.createConsumer(destination);
             consumer.setMessageListener(m -> {
                         try {
                             BrokerMessage message = new BrokerMessage(
