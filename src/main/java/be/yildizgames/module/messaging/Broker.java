@@ -60,30 +60,6 @@ public abstract class Broker {
     }
 
     /**
-     * @deprecated Use getBroker(BrokerProperties p).
-     * @param host broker host.
-     * @param port broker port.
-     * @return the created instance
-     */
-    @Deprecated(since = "1.0.4", forRemoval = true)
-    public static Broker getBroker(String host, int port) {
-        return getBrokerProvider().initialize(host, port);
-    }
-
-    /**
-     * @deprecated Use getBroker(BrokerProperties p).
-     * @param name broker name.
-     * @param p broker properties.
-     * @return the created instance
-     */
-    @Deprecated(since = "1.0.4", forRemoval = true)
-    public static Broker getBroker(String name, BrokerProperties p) {
-        ImplementationException.throwForNull(name);
-        ImplementationException.throwForNull(p);
-        return getBrokerProvider().initializeInternal(name, p);
-    }
-
-    /**
      * Retrieve the broker provider from the service.
      * @return The found broker provider.
      */

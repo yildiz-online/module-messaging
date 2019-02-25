@@ -38,9 +38,8 @@ public class BrokerMessage {
     BrokerMessage(final String text, final String correlationId) {
         super();
         ImplementationException.throwForNull(text);
-        ImplementationException.throwForNull(correlationId);
         this.text = text;
-        this.correlationId = correlationId;
+        this.correlationId = correlationId == null ? "-1" : correlationId;
     }
 
     public final String getText() {

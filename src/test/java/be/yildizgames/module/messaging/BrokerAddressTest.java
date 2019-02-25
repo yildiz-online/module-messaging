@@ -26,45 +26,49 @@
 
 package be.yildizgames.module.messaging;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+
 import java.util.List;
 
-/**
- * Build an address to connect to the broker
- */
-public class BrokerAddress {
+public class BrokerAddressTest {
 
-    private final String uri;
+    @Nested
+    public class Tcp {
 
-    private BrokerAddress(String uri) {
-        super();
-        this.uri = uri;
-    }
-
-    public static BrokerAddress tcp(String host, int port) {
-        return new BrokerAddress("tcp://" + host + ":" + port);
-    }
-
-    public static BrokerAddress failover(List<BrokerAddress> addresses) {
-        StringBuilder builder = new StringBuilder("failover:(");
-        for(int i = 0; i < addresses.size() ; i++) {
-            builder.append(addresses.get(i).uri);
-            if(i < addresses.size() - 1) {
-                builder.append(",");
-            }
+        @Test
+        public void happyFlow() {
+            BrokerAddress address = BrokerAddress.tcp("localhost", 61616);
+            Assertions.assertEquals("tcp://localhost:61616", address.getUri());
         }
-        builder.append(")");
-        return new BrokerAddress(builder.toString());
     }
 
-    public static BrokerAddress discovery(String agent) {
-        return new BrokerAddress("discovery:(multicast://" + agent + ")?initialReconnectDelay=100");
+    @Nested
+    public class Failover {
+
+        @Test
+        public void happyFlow() {
+            BrokerAddress address = BrokerAddress.failover(List.of(BrokerAddress.tcp("localhost", 61616)));
+            Assertions.assertEquals("failover:(tcp://localhost:61616)", address.getUri());
+        }
+
+        @Test
+        public void happyFlow2Addresses() {
+            BrokerAddress address = BrokerAddress.failover(List.of(BrokerAddress.tcp("localhost", 61616), BrokerAddress.tcp("test", 5555)));
+            Assertions.assertEquals("failover:(tcp://localhost:61616,tcp://test:5555)", address.getUri());
+        }
+
     }
 
-    public static BrokerAddress vm(String host) {
-        return new BrokerAddress("vm://" + host + "?broker.persistent=false");
+    @Nested
+    public class Discovery {
+
+        @Test
+        public void happyFlow() {
+
+        }
+
     }
 
-    public final String getUri() {
-        return this.uri;
-    }
 }

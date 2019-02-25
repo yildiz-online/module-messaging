@@ -31,14 +31,8 @@ import org.junit.jupiter.api.Test;
 
 public class BrokerTest {
 
-    @Disabled
     @Nested
     public class getBroker {
-
-        @Test
-        public void noImplementationHostPort() {
-            Assertions.assertThrows(ImplementationException.class, () -> Broker.getBroker("", 0));
-        }
 
         @Test
         public void noImplementationProperties() {
@@ -46,25 +40,9 @@ public class BrokerTest {
         }
 
         @Test
-        public void noImplementationNameProperties() {
-            Assertions.assertThrows(ImplementationException.class, () -> Broker.getBroker("test", BrokerPropertiesStandard.fromProperties(new DummyProperties().p)));
-        }
-
-        @Test
         public void noProperties() {
             Assertions.assertThrows(ImplementationException.class, () -> Broker.getBroker(null));
         }
-
-        @Test
-        public void noName() {
-            Assertions.assertThrows(ImplementationException.class, () -> Broker.getBroker(null, BrokerPropertiesStandard.fromProperties(new DummyProperties().p)));
-        }
-
-        @Test
-        public void nameNoProperties() {
-            Assertions.assertThrows(ImplementationException.class, () -> Broker.getBroker("test", null));
-        }
-
     }
 
 }
