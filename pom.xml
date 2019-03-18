@@ -43,7 +43,7 @@
   <parent>
     <artifactId>parent</artifactId>
     <groupId>be.yildiz-games</groupId>
-    <version>3.0.5-SNAPSHOT</version>
+    <version>3.0.5</version>
   </parent>
 
   <dependencies>
