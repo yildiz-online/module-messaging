@@ -32,4 +32,5 @@ module be.yildizgames.module.messaging {
     requires slf4j.api;
 
     exports be.yildizgames.module.messaging;
+    exports be.yildizgames.module.messaging.exception;
 }

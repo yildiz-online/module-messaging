@@ -37,7 +37,7 @@ public class MessagingException extends TechnicalException {
      * @param message Exception message.
      * @param cause Root exception.
      */
-    MessagingException(String message, Exception cause) {
+    public MessagingException(String message, Exception cause) {
         super(message, cause);
     }
 
@@ -53,7 +53,7 @@ public class MessagingException extends TechnicalException {
      * Create a new instance.
      * @param message Exception message.
      */
-    MessagingException(String message) {
+    public MessagingException(String message) {
         super(message);
     }
 }
