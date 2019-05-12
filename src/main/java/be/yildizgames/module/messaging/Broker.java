@@ -113,4 +113,5 @@ public abstract class Broker {
      * Close the connection to the broker.
      */
     public abstract void close() throws MessagingException;
+
 }
