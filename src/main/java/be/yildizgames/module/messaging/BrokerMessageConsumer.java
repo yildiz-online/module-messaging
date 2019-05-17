@@ -73,4 +73,5 @@ public class BrokerMessageConsumer {
     public final boolean hasMessage() {
         return !this.messageReceived.isEmpty();
     }
+
 }

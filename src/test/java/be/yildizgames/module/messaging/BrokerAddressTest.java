@@ -32,6 +32,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+/**
+ * @author Grégory Van den Borre
+ */
 public class BrokerAddressTest {
 
     @Nested

@@ -42,6 +42,10 @@ public class BrokerMessage {
         this.correlationId = correlationId == null ? "-1" : correlationId;
     }
 
+    /**
+     * Provide the text in the message.
+     * @return The text contained in the message.
+     */
     public final String getText() {
         return this.text;
     }

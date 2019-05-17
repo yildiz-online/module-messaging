@@ -52,10 +52,10 @@ public class BrokerMessageHeader {
     }
 
     public final String getKey() {
-        return key;
+        return this.key;
     }
 
     public final String getValue() {
-        return value;
+        return this.value;
     }
 }

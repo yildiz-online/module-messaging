@@ -33,6 +33,7 @@ import javax.jms.Session;
 
 /**
  * A message destination wis the channel where the asynchronous messages go.
+ * 
  * @author Grégory Van den Borre
  */
 public class BrokerMessageDestination {
