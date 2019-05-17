@@ -30,5 +30,4 @@ package be.yildizgames.module.messaging;
 public interface BrokerProvider {
 
     Broker initialize(BrokerProperties properties);
-
 }

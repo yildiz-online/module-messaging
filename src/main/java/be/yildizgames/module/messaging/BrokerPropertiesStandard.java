@@ -85,4 +85,5 @@ public class BrokerPropertiesStandard implements BrokerProperties {
     public final boolean getBrokerInternal() {
         return this.internal;
     }
+
 }

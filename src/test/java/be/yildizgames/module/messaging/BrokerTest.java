@@ -45,5 +45,4 @@ public class BrokerTest {
             Assertions.assertThrows(ImplementationException.class, () -> Broker.getBroker(null));
         }
     }
-
 }

@@ -53,4 +53,5 @@ public interface BrokerProperties {
      * @return The flag to build embedded broker or not.
      */
     boolean getBrokerInternal();
+
 }
