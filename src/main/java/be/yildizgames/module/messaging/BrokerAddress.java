@@ -67,4 +67,5 @@ public class BrokerAddress {
     public final String getUri() {
         return this.uri;
     }
+
 }

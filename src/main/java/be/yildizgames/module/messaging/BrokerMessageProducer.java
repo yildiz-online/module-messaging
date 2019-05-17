@@ -49,7 +49,7 @@ public class BrokerMessageProducer implements AsyncMessageProducer {
     }
 
     @Override
-    public void sendMessage(String message, BrokerMessageHeader... headers) {
+    public final void sendMessage(String message, BrokerMessageHeader... headers) {
         try {
             TextMessage toSend = this.session.createTextMessage(message);
             if(headers != null) {
