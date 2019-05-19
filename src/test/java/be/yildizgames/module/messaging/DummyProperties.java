@@ -12,4 +12,5 @@ class DummyProperties {
         p.put("broker.data", "value3");
         p.put("broker.internal", "true");
     }
+
 }

@@ -56,4 +56,5 @@ public class MessagingException extends TechnicalException {
     public MessagingException(String message) {
         super(message);
     }
+
 }

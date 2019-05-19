@@ -12,7 +12,7 @@ The messaging module is a set of classes to send and receive message asynchronou
 
 ## Requirements
 
-To build this module, you will need a java 9 JDK and Maven 3.
+To build this module, you will need the latest Java JDK and Maven 3.
 
 ## Coding Style and other information
 
