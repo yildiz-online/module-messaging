@@ -24,27 +24,32 @@
   ~
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
   <modelVersion>4.0.0</modelVersion>
+
   <name>Yildiz-Engine Module Messaging</name>
   <description>Contains the classes to send and receive async messages.</description>
-  <url>https://bitbucket.org/yildiz-engine-team/module-messaging</url>
+  <inceptionYear>2017</inceptionYear>
+  <url>https://engine.yildiz-games.be</url>
 
   <artifactId>module-messaging</artifactId>
   <version>2.0.3-SNAPSHOT</version>
 
-  <packaging>jar</packaging>
-  <inceptionYear>2017</inceptionYear>
-  <scm>
-    <connection>scm:git:https://bitbucket.org/yildiz-engine-team/module-messaging</connection>
-    <developerConnection>scm:git:https://bitbucket.org/yildiz-engine-team/module-messaging</developerConnection>
-    <url>https://bitbucket.org/yildiz-engine-team/module-messaging</url>
-  </scm>
   <parent>
     <artifactId>parent</artifactId>
     <groupId>be.yildiz-games</groupId>
     <version>3.0.5</version>
   </parent>
+
+  <packaging>jar</packaging>
+
+  <scm>
+    <connection>scm:git:https://github.com/yildiz-online/module-messaging</connection>
+    <developerConnection>scm:git:https://github.com/yildiz-online/module-messaging</developerConnection>
+    <url>https://github.com/yildiz-online/module-messaging</url>
+  </scm>
 
   <dependencies>
     <dependency>
