@@ -25,8 +25,6 @@
 package be.yildizgames.module.messaging;
 
 import be.yildizgames.module.messaging.exception.MessagingException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.jms.Destination;
 import javax.jms.JMSException;
@@ -42,7 +40,7 @@ import java.util.List;
  */
 public class BrokerMessageConsumer {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final System.Logger logger = System.getLogger(this.getClass().getName());
 
     private final List<BrokerMessage> messageReceived = new ArrayList<>();
 
@@ -57,7 +55,7 @@ public class BrokerMessageConsumer {
                             this.messageReceived.add(message);
                             listener.messageReceived(message);
                         } catch (JMSException e) {
-                            logger.error("Error retrieving JMS message", e);
+                            logger.log(System.Logger.Level.ERROR,"Error retrieving JMS message", e);
                         }
                     }
             );

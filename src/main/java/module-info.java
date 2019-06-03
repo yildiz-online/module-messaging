@@ -29,7 +29,6 @@ module be.yildizgames.module.messaging {
     requires be.yildizgames.common.exception;
 
     requires javax.jms.api;
-    requires slf4j.api;
 
     exports be.yildizgames.module.messaging;
     exports be.yildizgames.module.messaging.exception;
