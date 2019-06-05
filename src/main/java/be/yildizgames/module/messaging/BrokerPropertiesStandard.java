@@ -24,9 +24,8 @@
 
 package be.yildizgames.module.messaging;
 
-import be.yildizgames.common.exception.implementation.ImplementationException;
-import be.yildizgames.common.util.PropertiesHelper;
-
+import java.util.Objects;
+import java.util.Optional;
 import java.util.Properties;
 
 /**
@@ -45,11 +44,12 @@ public class BrokerPropertiesStandard implements BrokerProperties {
     private final boolean internal;
 
     private BrokerPropertiesStandard(Properties properties) {
-        ImplementationException.throwForNull(properties);
-        this.host = PropertiesHelper.getValue(properties, "broker.host");
-        this.port = PropertiesHelper.getIntValue(properties, "broker.port");
-        this.data = PropertiesHelper.getValue(properties,"broker.data");
-        this.internal = PropertiesHelper.getBooleanValue(properties,"broker.internal");
+        Objects.requireNonNull(properties);
+        Optional.ofNullable(properties.getProperty("broker.host")).orElseThrow(() -> new IllegalStateException("broker.host not found"));
+        this.host = Optional.ofNullable(properties.getProperty("broker.host")).orElseThrow(() -> new IllegalStateException("broker.host not found"));
+        this.port = Integer.parseInt(Optional.ofNullable(properties.getProperty("broker.port")).orElseThrow(() -> new IllegalStateException("broker.port not found")));
+        this.data = Optional.ofNullable(properties.getProperty("broker.data")).orElseThrow(() -> new IllegalStateException("broker.data not found"));
+        this.internal = Optional.ofNullable(properties.getProperty("broker.internal")).orElseThrow(() -> new IllegalStateException("broker.internal not found")).equalsIgnoreCase("true");
     }
 
     /**

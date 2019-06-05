@@ -23,8 +23,6 @@
  */
 package be.yildizgames.module.messaging;
 
-import be.yildizgames.common.exception.implementation.ImplementationException;
-import be.yildizgames.common.util.PropertiesException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -47,7 +45,7 @@ public class StandardBrokerPropertiesTest {
 
         @Test
         public void nullParameter() {
-            Assertions.assertThrows(ImplementationException.class, () -> BrokerPropertiesStandard.fromProperties(null));
+            Assertions.assertThrows(NullPointerException.class, () -> BrokerPropertiesStandard.fromProperties(null));
         }
 
         @Test
@@ -56,7 +54,7 @@ public class StandardBrokerPropertiesTest {
             p.put("broker.port", "1");
             p.put("broker.data", "value");
             p.put("broker.internal", "true");
-            Assertions.assertThrows(PropertiesException.class, () -> BrokerPropertiesStandard.fromProperties(p));
+            Assertions.assertThrows(IllegalStateException.class, () -> BrokerPropertiesStandard.fromProperties(p));
         }
 
         @Test
@@ -65,7 +63,7 @@ public class StandardBrokerPropertiesTest {
             p.put("broker.host", "value");
             p.put("broker.data", "value");
             p.put("broker.internal", "true");
-            Assertions.assertThrows(PropertiesException.class, () -> BrokerPropertiesStandard.fromProperties(p));
+            Assertions.assertThrows(IllegalStateException.class, () -> BrokerPropertiesStandard.fromProperties(p));
         }
 
         @Test
@@ -75,7 +73,7 @@ public class StandardBrokerPropertiesTest {
             p.put("broker.port", "v");
             p.put("broker.data", "value3");
             p.put("broker.internal", "true");
-            Assertions.assertThrows(PropertiesException.class, () -> BrokerPropertiesStandard.fromProperties(p));
+            Assertions.assertThrows(NumberFormatException.class, () -> BrokerPropertiesStandard.fromProperties(p));
         }
 
         @Test
@@ -84,7 +82,7 @@ public class StandardBrokerPropertiesTest {
             p.put("broker.host", "value");
             p.put("broker.port", "1");
             p.put("broker.internal", "true");
-            Assertions.assertThrows(PropertiesException.class, () -> BrokerPropertiesStandard.fromProperties(p));
+            Assertions.assertThrows(IllegalStateException.class, () -> BrokerPropertiesStandard.fromProperties(p));
         }
 
         @Test
@@ -93,7 +91,7 @@ public class StandardBrokerPropertiesTest {
             p.put("broker.host", "value");
             p.put("broker.port", "1");
             p.put("broker.data", "value3");
-            Assertions.assertThrows(PropertiesException.class, () -> BrokerPropertiesStandard.fromProperties(p));
+            Assertions.assertThrows(IllegalStateException.class, () -> BrokerPropertiesStandard.fromProperties(p));
         }
 
     }

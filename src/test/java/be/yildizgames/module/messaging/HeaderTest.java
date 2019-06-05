@@ -23,7 +23,6 @@
  */
 package be.yildizgames.module.messaging;
 
-import be.yildizgames.common.exception.implementation.ImplementationException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -43,7 +42,7 @@ public class HeaderTest {
 
         @Test
         public void nullParam() {
-            Assertions.assertThrows(ImplementationException.class, () -> BrokerMessageHeader.correlationId(null));
+            Assertions.assertThrows(NullPointerException.class, () -> BrokerMessageHeader.correlationId(null));
         }
 
     }

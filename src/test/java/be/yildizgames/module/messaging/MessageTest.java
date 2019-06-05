@@ -23,13 +23,9 @@
  */
 package be.yildizgames.module.messaging;
 
-import be.yildizgames.common.exception.implementation.ImplementationException;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-
-import java.util.Optional;
 
 
 public class MessageTest {
@@ -46,7 +42,7 @@ public class MessageTest {
 
         @Test
         public void withNullText() {
-            Assertions.assertThrows(ImplementationException.class, () -> new BrokerMessage(null, "cId"));
+            Assertions.assertThrows(NullPointerException.class, () -> new BrokerMessage(null, "cId"));
         }
 
         @Test

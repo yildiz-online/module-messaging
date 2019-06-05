@@ -58,16 +58,6 @@
       <version>2.0.1</version>
     </dependency>
     <dependency>
-      <groupId>be.yildiz-games</groupId>
-      <artifactId>common-util</artifactId>
-      <version>1.0.5</version>
-    </dependency>
-    <dependency>
-      <groupId>be.yildiz-games</groupId>
-      <artifactId>common-exception</artifactId>
-      <version>1.0.4</version>
-    </dependency>
-    <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
       <scope>test</scope>

@@ -24,11 +24,11 @@
 
 package be.yildizgames.module.messaging;
 
-import be.yildizgames.common.exception.implementation.ImplementationException;
 import be.yildizgames.module.messaging.exception.MessagingException;
 
 import javax.jms.Connection;
 import javax.jms.JMSException;
+import java.util.Objects;
 import java.util.ServiceLoader;
 
 /**
@@ -55,7 +55,7 @@ public abstract class Broker {
      * @return The created instance.
      */
     public static Broker getBroker(BrokerProperties p) {
-        ImplementationException.throwForNull(p);
+        Objects.requireNonNull(p);
         return getBrokerProvider().initialize(p);
     }
 
@@ -65,7 +65,7 @@ public abstract class Broker {
      */
     private static BrokerProvider getBrokerProvider() {
         ServiceLoader<BrokerProvider> provider = ServiceLoader.load(BrokerProvider.class);
-        return provider.findFirst().orElseThrow(() -> ImplementationException.missingImplementation("broker"));
+        return provider.findFirst().orElseThrow(() -> new IllegalStateException("Missing broker implementation"));
     }
 
     /**

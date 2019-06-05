@@ -23,7 +23,6 @@
  */
 package be.yildizgames.module.messaging;
 
-import be.yildizgames.common.exception.implementation.ImplementationException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
@@ -37,12 +36,12 @@ public class BrokerTest {
         @Disabled
         @Test
         public void noImplementationProperties() {
-            Assertions.assertThrows(ImplementationException.class, () -> Broker.getBroker(BrokerPropertiesStandard.fromProperties(new DummyProperties().p)));
+            Assertions.assertThrows(IllegalStateException.class, () -> Broker.getBroker(BrokerPropertiesStandard.fromProperties(new DummyProperties().p)));
         }
 
         @Test
         public void noProperties() {
-            Assertions.assertThrows(ImplementationException.class, () -> Broker.getBroker(null));
+            Assertions.assertThrows(NullPointerException.class, () -> Broker.getBroker(null));
         }
     }
 }

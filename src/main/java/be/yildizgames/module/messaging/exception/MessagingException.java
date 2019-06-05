@@ -24,13 +24,11 @@
 
 package be.yildizgames.module.messaging.exception;
 
-import be.yildizgames.common.exception.technical.TechnicalException;
-
 /**
  * A technical exception when a messaging action fails.
  * @author Grégory Van den Borre
  */
-public class MessagingException extends TechnicalException {
+public class MessagingException extends IllegalStateException {
 
     /**
      * Create a new instance.

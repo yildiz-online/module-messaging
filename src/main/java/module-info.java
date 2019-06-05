@@ -24,9 +24,6 @@
 
 module be.yildizgames.module.messaging {
 
-    requires be.yildizgames.common.util;
-    requires be.yildizgames.common.exception;
-
     requires javax.jms.api;
 
     exports be.yildizgames.module.messaging;

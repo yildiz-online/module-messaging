@@ -24,7 +24,7 @@
 
 package be.yildizgames.module.messaging;
 
-import be.yildizgames.common.exception.implementation.ImplementationException;
+import java.util.Objects;
 
 /**
  * @author Grégory Van den Borre
@@ -38,7 +38,7 @@ public class BrokerMessageHeader {
     private final String value;
 
     private BrokerMessageHeader(String key, String value) {
-        ImplementationException.throwForNull(value);
+        Objects.requireNonNull(value);
         this.key = key;
         this.value = value;
     }

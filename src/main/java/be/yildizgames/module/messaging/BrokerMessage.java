@@ -24,7 +24,7 @@
 
 package be.yildizgames.module.messaging;
 
-import be.yildizgames.common.exception.implementation.ImplementationException;
+import java.util.Objects;
 
 /**
  * @author Grégory Van den Borre
@@ -37,7 +37,7 @@ public class BrokerMessage {
 
     BrokerMessage(final String text, final String correlationId) {
         super();
-        ImplementationException.throwForNull(text);
+        Objects.requireNonNull(text);
         this.text = text;
         this.correlationId = correlationId == null ? "-1" : correlationId;
     }

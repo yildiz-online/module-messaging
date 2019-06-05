@@ -24,7 +24,6 @@
 package be.yildizgames.module.messaging.exception;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
@@ -36,7 +35,6 @@ public class MessagingExceptionTest {
         @Test
         public void message() {
             MessagingException m = new MessagingException("a test message");
-            Assertions.assertEquals("a test message", m.message);
             Assertions.assertEquals("a test message", m.getMessage());
             Assertions.assertNull(m.getCause());
         }
@@ -53,8 +51,7 @@ public class MessagingExceptionTest {
         public void messageAndCause() {
             RuntimeException root = new RuntimeException("boum");
             MessagingException m = new MessagingException("a test message", root);
-            Assertions.assertEquals("a test message", m.message);
-            Assertions.assertEquals("java.lang.RuntimeException: boum", m.getMessage());
+            Assertions.assertEquals("a test message", m.getMessage());
             Assertions.assertEquals(root, m.getCause());
         }
 
