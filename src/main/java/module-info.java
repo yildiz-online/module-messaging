@@ -24,7 +24,6 @@
 
 module be.yildizgames.module.messaging {
 
-    requires be.yildizgames.common.logging;
     requires be.yildizgames.common.util;
     requires be.yildizgames.common.exception;
 
