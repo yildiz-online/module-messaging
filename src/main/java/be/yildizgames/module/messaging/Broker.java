@@ -24,6 +24,7 @@
 
 package be.yildizgames.module.messaging;
 
+import be.yildizgames.common.configuration.Configurable;
 import be.yildizgames.module.messaging.exception.MessagingException;
 
 import javax.jms.Connection;
@@ -35,7 +36,7 @@ import java.util.ServiceLoader;
  * The broker is the application to connect to, in order to use messaging.
  * @author Grégory Van den Borre
  */
-public abstract class Broker {
+public abstract class Broker implements Configurable<BrokerProperties> {
 
     /**
      * Connection to the broker system.
