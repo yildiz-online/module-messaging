@@ -40,7 +40,7 @@ public class StandardBrokerPropertiesTest {
             Assertions.assertEquals("value1", bp.getBrokerHost());
             Assertions.assertEquals(1, bp.getBrokerPort());
             Assertions.assertEquals("value3", bp.getBrokerDataFolder());
-            Assertions.assertEquals(true, bp.getBrokerInternal());
+            Assertions.assertTrue(bp.getBrokerInternal());
         }
 
         @Test

@@ -4,7 +4,7 @@ import java.util.Properties;
 
 class DummyProperties {
 
-    Properties p = new Properties();
+    final Properties p = new Properties();
 
     DummyProperties() {
         p.put("broker.host", "value1");
