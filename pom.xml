@@ -59,7 +59,7 @@
     <dependency>
       <groupId>be.yildiz-games</groupId>
       <artifactId>common-configuration</artifactId>
-      <version>1.0.5-SNAPSHOT</version>
+      <version>1.0.6</version>
     </dependency>
     <dependency>
       <groupId>javax.jms</groupId>
