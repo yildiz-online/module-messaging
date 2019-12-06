@@ -40,7 +40,7 @@
   <parent>
     <artifactId>parent</artifactId>
     <groupId>be.yildiz-games</groupId>
-    <version>3.0.8</version>
+    <version>3.0.9</version>
   </parent>
 
   <packaging>jar</packaging>
