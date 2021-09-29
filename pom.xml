@@ -45,10 +45,6 @@
 
   <packaging>jar</packaging>
 
-  <properties>
-    <java.version>11</java.version>
-  </properties>
-
   <scm>
     <connection>scm:git:https://github.com/yildiz-online/module-messaging</connection>
     <developerConnection>scm:git:https://github.com/yildiz-online/module-messaging</developerConnection>
