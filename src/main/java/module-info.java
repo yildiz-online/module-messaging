@@ -24,6 +24,8 @@
 
 module be.yildizgames.module.messaging {
 
+    uses be.yildizgames.module.messaging.BrokerProvider;
+
     requires javax.jms.api;
 
     exports be.yildizgames.module.messaging;

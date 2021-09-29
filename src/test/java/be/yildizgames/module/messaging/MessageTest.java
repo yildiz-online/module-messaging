@@ -36,8 +36,8 @@ public class MessageTest {
         @Test
         public void happyFlow() {
             BrokerMessage m = new BrokerMessage("text_ok", "cId");
-            Assertions.assertEquals("text_ok", m.getText());
-            Assertions.assertEquals("cId", m.getCorrelationId());
+            Assertions.assertEquals("text_ok", m.text());
+            Assertions.assertEquals("cId", m.correlationId());
         }
 
         @Test
@@ -47,7 +47,7 @@ public class MessageTest {
 
         @Test
         public void withNullCorrelationId() {
-            Assertions.assertEquals("-1", new BrokerMessage("text_ok", null).getCorrelationId());
+            Assertions.assertEquals("-1", new BrokerMessage("text_ok", null).correlationId());
         }
     }
 

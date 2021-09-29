@@ -36,8 +36,8 @@ public class HeaderTest {
         public void happyFlow() {
             BrokerMessageHeader h = BrokerMessageHeader.correlationId("a1");
             Assertions.assertTrue(h.isCorrelationId());
-            Assertions.assertEquals("correlationId", h.getKey());
-            Assertions.assertEquals("a1", h.getValue());
+            Assertions.assertEquals("correlationId", h.key());
+            Assertions.assertEquals("a1", h.value());
         }
 
         @Test

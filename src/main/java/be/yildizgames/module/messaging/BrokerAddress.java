@@ -31,14 +31,7 @@ import java.util.List;
 /**
  * Build an address to connect to the broker
  */
-public class BrokerAddress {
-
-    private final String uri;
-
-    private BrokerAddress(String uri) {
-        super();
-        this.uri = uri;
-    }
+public record BrokerAddress(String uri) {
 
     public static BrokerAddress tcp(String host, int port) {
         return new BrokerAddress("tcp://" + host + ":" + port);
@@ -46,9 +39,9 @@ public class BrokerAddress {
 
     public static BrokerAddress failover(List<BrokerAddress> addresses) {
         StringBuilder builder = new StringBuilder("failover:(");
-        for(int i = 0; i < addresses.size() ; i++) {
+        for (int i = 0; i < addresses.size(); i++) {
             builder.append(addresses.get(i).uri);
-            if(i < addresses.size() - 1) {
+            if (i < addresses.size() - 1) {
                 builder.append(",");
             }
         }
@@ -63,9 +56,4 @@ public class BrokerAddress {
     public static BrokerAddress vm(String host) {
         return new BrokerAddress("vm://" + host + "?broker.persistent=false");
     }
-
-    public final String getUri() {
-        return this.uri;
-    }
-
 }

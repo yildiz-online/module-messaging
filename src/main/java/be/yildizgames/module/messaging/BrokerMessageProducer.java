@@ -55,7 +55,7 @@ public class BrokerMessageProducer implements AsyncMessageProducer {
             if(headers != null) {
                 for (BrokerMessageHeader h : headers) {
                     if (h.isCorrelationId()) {
-                        toSend.setJMSCorrelationID(h.getValue());
+                        toSend.setJMSCorrelationID(h.value());
                     }
                 }
             }

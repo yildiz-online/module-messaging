@@ -29,33 +29,20 @@ import java.util.Objects;
 /**
  * @author Grégory Van den Borre
  */
-public class BrokerMessageHeader {
+public record BrokerMessageHeader(String key, String value) {
 
     private static final String CORRELATION_ID = "correlationId";
 
-    private final String key;
-
-    private final String value;
-
-    private BrokerMessageHeader(String key, String value) {
+    public BrokerMessageHeader {
         Objects.requireNonNull(value);
-        this.key = key;
-        this.value = value;
     }
 
     public static BrokerMessageHeader correlationId(String value) {
         return new BrokerMessageHeader(CORRELATION_ID, value);
     }
 
-    public final boolean isCorrelationId() {
+    public boolean isCorrelationId() {
         return this.key.equals(CORRELATION_ID);
     }
 
-    public final String getKey() {
-        return this.key;
-    }
-
-    public final String getValue() {
-        return this.value;
-    }
 }

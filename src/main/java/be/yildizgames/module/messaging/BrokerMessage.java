@@ -29,33 +29,16 @@ import java.util.Objects;
 /**
  * @author Grégory Van den Borre
  */
-public class BrokerMessage {
+public record BrokerMessage(String text, String correlationId) {
 
-    private final String text;
-
-    private final String correlationId;
-
-    BrokerMessage(final String text, final String correlationId) {
-        super();
+    public BrokerMessage(final String text, final String correlationId) {
         Objects.requireNonNull(text);
         this.text = text;
         this.correlationId = correlationId == null ? "-1" : correlationId;
     }
 
-    /**
-     * Provide the text in the message.
-     * @return The text contained in the message.
-     */
-    public final String getText() {
-        return this.text;
-    }
-
-    public final String getCorrelationId() {
-        return this.correlationId;
-    }
-
     @Override
-    public final String toString() {
-        return this.getText();
+    public String toString() {
+        return this.text();
     }
 }
