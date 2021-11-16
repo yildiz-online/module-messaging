@@ -1,14 +1,15 @@
 version: 2
 updates:
-- package-ecosystem: maven
-  directory: "/"
-  schedule:
-    interval: daily
-    time: "04:00"
-    timezone: Europe/Brussels
-  open-pull-requests-limit: 99
-  assignees:
-    - "yildiz-online"
-  commit-message:
-    prefix: "[UPGRADE]"
-    include: "scope"
+  - package-ecosystem: maven
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "sunday"
+      time: "04:00"
+      timezone: Europe/Brussels
+    open-pull-requests-limit: 99
+    assignees:
+      - "yildiz-online"
+    commit-message:
+      prefix: "[UPGRADE]"
+      include: "scope"
