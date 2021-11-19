@@ -45,7 +45,6 @@ public class BrokerPropertiesStandard implements BrokerProperties {
 
     private BrokerPropertiesStandard(Properties properties) {
         Objects.requireNonNull(properties);
-        Optional.ofNullable(properties.getProperty("broker.host")).orElseThrow(() -> new IllegalStateException("broker.host not found"));
         this.host = Optional.ofNullable(properties.getProperty("broker.host")).orElseThrow(() -> new IllegalStateException("broker.host not found"));
         this.port = Integer.parseInt(Optional.ofNullable(properties.getProperty("broker.port")).orElseThrow(() -> new IllegalStateException("broker.port not found")));
         this.data = Optional.ofNullable(properties.getProperty("broker.data")).orElseThrow(() -> new IllegalStateException("broker.data not found"));

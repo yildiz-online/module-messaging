@@ -28,37 +28,36 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 
-public class MessageTest {
+class MessageTest {
 
     @Nested
-    public class Constructor {
+    class Constructor {
 
         @Test
-        public void happyFlow() {
+        void happyFlow() {
             BrokerMessage m = new BrokerMessage("text_ok", "cId");
             Assertions.assertEquals("text_ok", m.text());
             Assertions.assertEquals("cId", m.correlationId());
         }
 
         @Test
-        public void withNullText() {
+        void withNullText() {
             Assertions.assertThrows(NullPointerException.class, () -> new BrokerMessage(null, "cId"));
         }
 
         @Test
-        public void withNullCorrelationId() {
+        void withNullCorrelationId() {
             Assertions.assertEquals("-1", new BrokerMessage("text_ok", null).correlationId());
         }
     }
 
     @Nested
-    public class ToString {
+    class ToString {
 
         @Test
-        public void happyFlow() {
+        void happyFlow() {
             BrokerMessage m = new BrokerMessage("text_ok", "cId");
             Assertions.assertEquals("text_ok", m.toString());
         }
-
     }
 }

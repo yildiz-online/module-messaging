@@ -27,13 +27,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-public class HeaderTest {
+class HeaderTest {
 
     @Nested
-    public class CorrelationId {
+    class CorrelationId {
 
         @Test
-        public void happyFlow() {
+        void happyFlow() {
             BrokerMessageHeader h = BrokerMessageHeader.correlationId("a1");
             Assertions.assertTrue(h.isCorrelationId());
             Assertions.assertEquals("correlationId", h.key());
@@ -41,7 +41,7 @@ public class HeaderTest {
         }
 
         @Test
-        public void nullParam() {
+        void nullParam() {
             Assertions.assertThrows(NullPointerException.class, () -> BrokerMessageHeader.correlationId(null));
         }
 

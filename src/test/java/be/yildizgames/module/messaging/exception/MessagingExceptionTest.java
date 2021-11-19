@@ -27,20 +27,20 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-public class MessagingExceptionTest {
+class MessagingExceptionTest {
 
     @Nested
-    public class Constructor {
+    class Constructor {
 
         @Test
-        public void message() {
+        void message() {
             MessagingException m = new MessagingException("a test message");
             Assertions.assertEquals("a test message", m.getMessage());
             Assertions.assertNull(m.getCause());
         }
 
         @Test
-        public void rootCause() {
+        void rootCause() {
             RuntimeException root = new RuntimeException("boum");
             MessagingException m = new MessagingException(root);
             Assertions.assertEquals(root, m.getCause());
@@ -48,7 +48,7 @@ public class MessagingExceptionTest {
         }
 
         @Test
-        public void messageAndCause() {
+        void messageAndCause() {
             RuntimeException root = new RuntimeException("boum");
             MessagingException m = new MessagingException("a test message", root);
             Assertions.assertEquals("a test message", m.getMessage());

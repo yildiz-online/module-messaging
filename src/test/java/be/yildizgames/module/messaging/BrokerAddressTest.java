@@ -35,43 +35,31 @@ import java.util.List;
 /**
  * @author Grégory Van den Borre
  */
-public class BrokerAddressTest {
+class BrokerAddressTest {
 
     @Nested
-    public class Tcp {
+    class Tcp {
 
         @Test
-        public void happyFlow() {
+        void happyFlow() {
             BrokerAddress address = BrokerAddress.tcp("localhost", 61616);
             Assertions.assertEquals("tcp://localhost:61616", address.uri());
         }
     }
 
     @Nested
-    public class Failover {
+    class Failover {
 
         @Test
-        public void happyFlow() {
+        void happyFlow() {
             BrokerAddress address = BrokerAddress.failover(List.of(BrokerAddress.tcp("localhost", 61616)));
             Assertions.assertEquals("failover:(tcp://localhost:61616)", address.uri());
         }
 
         @Test
-        public void happyFlow2Addresses() {
+        void happyFlow2Addresses() {
             BrokerAddress address = BrokerAddress.failover(List.of(BrokerAddress.tcp("localhost", 61616), BrokerAddress.tcp("test", 5555)));
             Assertions.assertEquals("failover:(tcp://localhost:61616,tcp://test:5555)", address.uri());
         }
-
     }
-
-    @Nested
-    public class Discovery {
-
-        @Test
-        public void happyFlow() {
-
-        }
-
-    }
-
 }

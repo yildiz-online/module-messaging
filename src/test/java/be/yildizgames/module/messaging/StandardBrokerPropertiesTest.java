@@ -32,10 +32,10 @@ import java.util.Properties;
 public class StandardBrokerPropertiesTest {
 
     @Nested
-    public class Constructor {
+    class Constructor {
 
         @Test
-        public void happyFlow() {
+        void happyFlow() {
             BrokerProperties bp = BrokerPropertiesStandard.fromProperties(new DummyProperties().p);
             Assertions.assertEquals("value1", bp.getBrokerHost());
             Assertions.assertEquals(1, bp.getBrokerPort());
@@ -44,12 +44,12 @@ public class StandardBrokerPropertiesTest {
         }
 
         @Test
-        public void nullParameter() {
+        void nullParameter() {
             Assertions.assertThrows(NullPointerException.class, () -> BrokerPropertiesStandard.fromProperties(null));
         }
 
         @Test
-        public void noHost() {
+        void noHost() {
             Properties p = new Properties();
             p.put("broker.port", "1");
             p.put("broker.data", "value");
@@ -58,7 +58,7 @@ public class StandardBrokerPropertiesTest {
         }
 
         @Test
-        public void noPort() {
+        void noPort() {
             Properties p = new Properties();
             p.put("broker.host", "value");
             p.put("broker.data", "value");
@@ -67,7 +67,7 @@ public class StandardBrokerPropertiesTest {
         }
 
         @Test
-        public void invalidPort() {
+        void invalidPort() {
             Properties p = new Properties();
             p.put("broker.host", "value1");
             p.put("broker.port", "v");
@@ -77,7 +77,7 @@ public class StandardBrokerPropertiesTest {
         }
 
         @Test
-        public void noData() {
+        void noData() {
             Properties p = new Properties();
             p.put("broker.host", "value");
             p.put("broker.port", "1");
@@ -86,7 +86,7 @@ public class StandardBrokerPropertiesTest {
         }
 
         @Test
-        public void noInternal() {
+        void noInternal() {
             Properties p = new Properties();
             p.put("broker.host", "value");
             p.put("broker.port", "1");
