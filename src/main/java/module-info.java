@@ -22,7 +22,7 @@
  *
  */
 
-module be.yildizgames.module.messaging {
+open module be.yildizgames.module.messaging {
 
     uses be.yildizgames.module.messaging.BrokerProvider;
 
