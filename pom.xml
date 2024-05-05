@@ -35,7 +35,7 @@
   <url>https://engine.yildiz-games.be</url>
 
   <artifactId>module-messaging</artifactId>
-  <version>2.0.5-SNAPSHOT</version>
+  <version>3.0.0</version>
 
   <parent>
     <artifactId>parent</artifactId>
