@@ -26,8 +26,8 @@ package be.yildizgames.module.messaging;
 
 import be.yildizgames.module.messaging.exception.MessagingException;
 
-import javax.jms.Connection;
-import javax.jms.JMSException;
+import jakarta.jms.Connection;
+import jakarta.jms.JMSException;
 import java.util.Objects;
 import java.util.ServiceLoader;
 

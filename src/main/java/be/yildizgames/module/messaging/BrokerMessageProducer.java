@@ -27,7 +27,7 @@ package be.yildizgames.module.messaging;
 
 import be.yildizgames.module.messaging.exception.MessagingException;
 
-import javax.jms.*;
+import jakarta.jms.*;
 
 
 /**

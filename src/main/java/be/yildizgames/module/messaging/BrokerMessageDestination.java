@@ -26,10 +26,10 @@ package be.yildizgames.module.messaging;
 
 import be.yildizgames.module.messaging.exception.MessagingException;
 
-import javax.jms.Connection;
-import javax.jms.Destination;
-import javax.jms.JMSException;
-import javax.jms.Session;
+import jakarta.jms.Connection;
+import jakarta.jms.Destination;
+import jakarta.jms.JMSException;
+import jakarta.jms.Session;
 
 /**
  * A message destination wis the channel where the asynchronous messages go.

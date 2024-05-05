@@ -26,7 +26,7 @@ open module be.yildizgames.module.messaging {
 
     uses be.yildizgames.module.messaging.BrokerProvider;
 
-    requires javax.jms.api;
+    requires jakarta.messaging;
 
     exports be.yildizgames.module.messaging;
     exports be.yildizgames.module.messaging.exception;

@@ -26,11 +26,11 @@ package be.yildizgames.module.messaging;
 
 import be.yildizgames.module.messaging.exception.MessagingException;
 
-import javax.jms.Destination;
-import javax.jms.JMSException;
-import javax.jms.MessageConsumer;
-import javax.jms.Session;
-import javax.jms.TextMessage;
+import jakarta.jms.Destination;
+import jakarta.jms.JMSException;
+import jakarta.jms.MessageConsumer;
+import jakarta.jms.Session;
+import jakarta.jms.TextMessage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
